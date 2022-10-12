@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:ultimate_tic_tac_toe/pages/settings.dart';
+import 'package:ultimate_tic_tac_toe/pages/home.dart';
+import 'game.dart';
 
-import 'game_settings.dart';
-
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-  final String title = "Home";
-  final String gameSettings = "Play Game";
-  final String settings = "Settings";
+class GameConclusion extends StatefulWidget {
+  const GameConclusion({super.key});
+  final String title = "Victory Screen";
+  final String home = "Return to Home";
+  final String game = "Another game";
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<GameConclusion> createState() => _GameConclusionState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _GameConclusionState extends State<GameConclusion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,20 +30,20 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const GameSettings(),
+                      builder: (context) => const HomePage(),
                     ));
               },
-              child: Text(widget.gameSettings),
+              child: Text(widget.home),
             ),
             ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const AppSettings(),
+                        builder: (context) => const GamePage(),
                       ));
                 },
-                child: Text(widget.settings))
+                child: Text(widget.game))
           ],
         ),
       ),
