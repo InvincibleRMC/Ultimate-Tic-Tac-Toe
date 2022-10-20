@@ -29,8 +29,11 @@ class _SubBoardState extends State<SubBoard> {
         Image.asset('images/board.png',
             height: widget.boardHeight, width: widget.boardWidth),
         Container(
+            //So X and Os line up
+            //TODO
+            // Could maybe be done better
             padding: EdgeInsets.symmetric(
-              vertical: 0.0,
+              vertical: 70.0,
             ),
             child: subBoardTiles(widget.boardNum)),
       ],
@@ -38,6 +41,11 @@ class _SubBoardState extends State<SubBoard> {
   }
 
   void updateTile(index) {
+    //TODO
+    //check if board is solved
+
+    //TODO
+    //check if this is a "current board"
     setState(() {
       if (tileStatesList[index] == TileState.NONE) {
         tileStatesList[index] = turn;
@@ -49,99 +57,37 @@ class _SubBoardState extends State<SubBoard> {
         }
       }
     });
+    //TODO
+    //set board solved if solved
+    //If solved draw an X or O over the board
   }
 
   Widget subBoardTiles(boardNum) {
     return Builder(builder: (context) {
       final boardDim = MediaQuery.of(context).size.width / 3;
       final tileDim = boardDim / 3;
+      const int boardCount = 3;
+      final children = <Widget>[];
+
+      for (int i = 0; i < boardCount; i++) {
+        final childrenRow = <Widget>[];
+        for (int j = 0; j < boardCount; j++) {
+          childrenRow.add(
+            BoardTile(
+              x: i,
+              y: j,
+              tileState: tileStatesList[i * boardCount + j],
+              tileDim: tileDim,
+              boardNum: boardNum,
+              onPress: () => updateTile(i * boardCount + j),
+            ),
+          );
+        }
+        children.add(Row(children: childrenRow));
+      }
 
       return Container(
-        width: boardDim,
-        height: boardDim,
-        child: Column(children: [
-          Row(children: [
-            BoardTile(
-              x: 0,
-              y: 2,
-              tileState: tileStatesList[0],
-              tileDim: tileDim,
-              boardNum: boardNum,
-              onPress: () => updateTile(0),
-            ),
-            BoardTile(
-              x: 1,
-              y: 2,
-              tileState: tileStatesList[1],
-              tileDim: tileDim,
-              boardNum: boardNum,
-              onPress: () => updateTile(1),
-            ),
-            BoardTile(
-              x: 2,
-              y: 2,
-              tileState: tileStatesList[2],
-              tileDim: tileDim,
-              boardNum: boardNum,
-              onPress: () => updateTile(2),
-            ),
-          ]),
-          Row(children: [
-            BoardTile(
-              x: 0,
-              y: 1,
-              tileState: tileStatesList[3],
-              tileDim: tileDim,
-              boardNum: boardNum,
-              onPress: () => updateTile(3),
-            ),
-            BoardTile(
-              x: 1,
-              y: 1,
-              tileState: tileStatesList[4],
-              tileDim: tileDim,
-              boardNum: boardNum,
-              onPress: () => updateTile(4),
-            ),
-            BoardTile(
-              x: 2,
-              y: 1,
-              tileState: tileStatesList[5],
-              tileDim: tileDim,
-              boardNum: boardNum,
-              onPress: () => updateTile(5),
-            ),
-          ]),
-          Row(children: [
-            BoardTile(
-              x: 0,
-              y: 0,
-              tileState: tileStatesList[6],
-              tileDim: tileDim,
-              boardNum: boardNum,
-              onPress: () => updateTile(6),
-            ),
-            BoardTile(
-              x: 1,
-              y: 0,
-              tileState: tileStatesList[7],
-              tileDim: tileDim,
-              boardNum: boardNum,
-              onPress: () => updateTile(7),
-            ),
-            BoardTile(
-              x: 2,
-              y: 0,
-              tileState: tileStatesList[8],
-              tileDim: tileDim,
-              boardNum: boardNum,
-              onPress: () => updateTile(8),
-            ),
-          ])
-        ]),
-      );
+          width: boardDim, height: boardDim, child: Column(children: children));
     });
   }
 }
-
-//

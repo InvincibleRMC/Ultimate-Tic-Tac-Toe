@@ -26,62 +26,26 @@ Widget gameBoard() {
     final mainBoardHeight = MediaQuery.of(context).size.height;
     final subBoardHeight = mainBoardHeight / 3;
     final subBoardWidth = mainBoardWidth / 3;
+    const int boardCount = 3;
+    final children = <Widget>[];
+
+    for (int i = 0; i < boardCount; i++) {
+      final childrenRow = <Widget>[];
+      for (int j = 0; j < boardCount; j++) {
+        childrenRow.add(
+          SubBoard(
+            boardWidth: subBoardWidth,
+            boardHeight: subBoardHeight,
+            boardNum: i * boardCount + j,
+          ),
+        );
+      }
+      children.add(Row(children: childrenRow));
+    }
 
     return Container(
         width: mainBoardWidth,
         height: mainBoardHeight,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                SubBoard(
-                  boardWidth: subBoardWidth,
-                  boardHeight: subBoardHeight,
-                  boardNum: 0,
-                ),
-                SubBoard(
-                    boardWidth: subBoardWidth,
-                    boardHeight: subBoardHeight,
-                    boardNum: 1),
-                SubBoard(
-                    boardWidth: subBoardWidth,
-                    boardHeight: subBoardHeight,
-                    boardNum: 2),
-              ],
-            ),
-            Row(
-              children: [
-                SubBoard(
-                    boardWidth: subBoardWidth,
-                    boardHeight: subBoardHeight,
-                    boardNum: 3),
-                SubBoard(
-                    boardWidth: subBoardWidth,
-                    boardHeight: subBoardHeight,
-                    boardNum: 4),
-                SubBoard(
-                    boardWidth: subBoardWidth,
-                    boardHeight: subBoardHeight,
-                    boardNum: 5),
-              ],
-            ),
-            Row(
-              children: [
-                SubBoard(
-                    boardWidth: subBoardWidth,
-                    boardHeight: subBoardHeight,
-                    boardNum: 6),
-                SubBoard(
-                    boardWidth: subBoardWidth,
-                    boardHeight: subBoardHeight,
-                    boardNum: 7),
-                SubBoard(
-                    boardWidth: subBoardWidth,
-                    boardHeight: subBoardHeight,
-                    boardNum: 8),
-              ],
-            )
-          ],
-        ));
+        child: Column(children: children));
   });
 }
