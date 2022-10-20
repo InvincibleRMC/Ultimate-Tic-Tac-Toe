@@ -51,3 +51,4 @@ macos/*
 test/*
 web/*
 windows/*
+.vscode/*
