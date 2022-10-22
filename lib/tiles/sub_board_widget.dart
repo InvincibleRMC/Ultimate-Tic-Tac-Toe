@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
-import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_widget.dart';
 
 class SubBoardWidget extends StatefulWidget {
   final SubBoard _subBoard;
   final double _boardWidthPixels;
   final double _boardHeightPixels;
-
-  @override
-  State<SubBoardWidget> createState() => SubBoardState();
 
   //TODO make a square not rectangle?
   const SubBoardWidget({
@@ -29,22 +25,13 @@ class SubBoardWidget extends StatefulWidget {
   double getBoardHeightPixels() {
     return _boardHeightPixels;
   }
+
+  @override
+  State<StatefulWidget> createState() => SubBoardState();
 }
 
 @visibleForTesting
 class SubBoardState extends State<SubBoardWidget> {
-  List<TileState> _tileStatesList = List.filled(9, TileState.none);
-  // TODO move higher
-  TileState _turn = TileState.X;
-
-  TileState getTileState() {
-    return _turn;
-  }
-
-  List<TileState> getListTileState() {
-    return _tileStatesList;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -55,7 +42,7 @@ class SubBoardState extends State<SubBoardWidget> {
             //So X and Os line up
             //TODO
             // Could maybe be done better
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               vertical: 70.0,
             ),
             child: subBoardTiles(widget._subBoard)),
@@ -86,8 +73,7 @@ class SubBoardState extends State<SubBoardWidget> {
         children.add(Row(children: childrenRow));
       }
 
-      return Container(
-          width: boardDim, height: boardDim, child: Column(children: children));
+      return SizedBox(width: boardDim, child: Column(children: children));
     });
   }
 }

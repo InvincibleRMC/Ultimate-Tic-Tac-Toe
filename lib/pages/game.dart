@@ -48,7 +48,7 @@ Widget gameBoard() {
       children.add(Row(children: childrenRow));
     }
 
-    return Container(
+    return SizedBox(
         width: mainBoardWidth,
         height: mainBoardHeight,
         child: Column(children: children));

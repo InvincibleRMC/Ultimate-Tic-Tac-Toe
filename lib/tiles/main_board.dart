@@ -22,6 +22,6 @@ class Board {
   }
 
   void nextTurn() {
-    _turn == TileState.X ? TileState.O : TileState.X;
+    _turn = (_turn == TileState.X) ? TileState.O : TileState.X;
   }
 }

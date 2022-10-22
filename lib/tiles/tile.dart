@@ -14,7 +14,7 @@ class Tile {
     this.state = state;
   }
 
-  TileState getState() {
+  TileState getTile() {
     return state;
   }
 }
