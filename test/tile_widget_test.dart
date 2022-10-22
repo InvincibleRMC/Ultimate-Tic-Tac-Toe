@@ -25,5 +25,12 @@ void main() {
     expect(find.byKey(keyEmpty), findsNothing);
     expect(find.byKey(keyO), findsNothing);
     expect(find.byKey(keyX), findsOneWidget);
+
+    // Tapping the widget to confirm that it does not change after set
+    await tester.tap(find.byWidget(tw));
+    await tester.pump();
+    expect(find.byKey(keyEmpty), findsNothing);
+    expect(find.byKey(keyO), findsNothing);
+    expect(find.byKey(keyX), findsOneWidget);
   });
 }
