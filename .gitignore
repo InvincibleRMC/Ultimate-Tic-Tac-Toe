@@ -48,7 +48,6 @@ android/*
 ios/*
 linux/*
 macos/*
-test/*
 web/*
 windows/*
 .vscode/*

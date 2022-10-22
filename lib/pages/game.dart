@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ultimate_tic_tac_toe/tiles/subBoard.dart';
+import 'package:ultimate_tic_tac_toe/tiles/sub_board_widget.dart';
+
+import '../tiles/main_board.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key});
@@ -24,19 +26,22 @@ Widget gameBoard() {
   return Builder(builder: (context) {
     final mainBoardWidth = MediaQuery.of(context).size.width;
     final mainBoardHeight = MediaQuery.of(context).size.height;
-    final subBoardHeight = mainBoardHeight / 3;
-    final subBoardWidth = mainBoardWidth / 3;
     const int boardCount = 3;
+    final Board board = Board(boardCount);
+
+    final subBoardHeight = mainBoardHeight / boardCount;
+    final subBoardWidth = mainBoardWidth / boardCount;
+
     final children = <Widget>[];
 
     for (int i = 0; i < boardCount; i++) {
       final childrenRow = <Widget>[];
       for (int j = 0; j < boardCount; j++) {
         childrenRow.add(
-          SubBoard(
-            boardWidth: subBoardWidth,
-            boardHeight: subBoardHeight,
-            boardNum: i * boardCount + j,
+          SubBoardWidget(
+            subBoard: board.getSubBoard(i, j),
+            boardWidthPixels: subBoardWidth,
+            boardHeightPixels: subBoardHeight,
           ),
         );
       }
