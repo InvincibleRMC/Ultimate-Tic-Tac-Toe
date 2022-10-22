@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_widget.dart';
 
-class SubBoardWidget extends StatefulWidget {
+class SubBoardWidget extends StatelessWidget {
   final SubBoard _subBoard;
   final double _boardWidthPixels;
   final double _boardHeightPixels;
@@ -27,17 +27,11 @@ class SubBoardWidget extends StatefulWidget {
   }
 
   @override
-  State<StatefulWidget> createState() => SubBoardState();
-}
-
-@visibleForTesting
-class SubBoardState extends State<SubBoardWidget> {
-  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Image.asset('images/board.png',
-            height: widget._boardHeightPixels, width: widget._boardWidthPixels),
+            height: _boardHeightPixels, width: _boardWidthPixels),
         Container(
             //So X and Os line up
             //TODO
@@ -45,14 +39,14 @@ class SubBoardState extends State<SubBoardWidget> {
             padding: const EdgeInsets.symmetric(
               vertical: 70.0,
             ),
-            child: subBoardTiles(widget._subBoard)),
+            child: subBoardTiles()),
       ],
     );
   }
 
-  Widget subBoardTiles(SubBoard subBoard) {
+  Widget subBoardTiles() {
     return Builder(builder: (context) {
-      final int boardCount = subBoard.getBoard().size();
+      final int boardCount = _subBoard.getBoard().size();
       final boardDim = MediaQuery.of(context).size.width / boardCount;
       final tileDim = boardDim / boardCount;
 
@@ -66,7 +60,7 @@ class SubBoardState extends State<SubBoardWidget> {
               x: i,
               y: j,
               tileDim: tileDim,
-              tile: subBoard.getTile(i, j),
+              tile: _subBoard.getTile(i, j),
             ),
           );
         }

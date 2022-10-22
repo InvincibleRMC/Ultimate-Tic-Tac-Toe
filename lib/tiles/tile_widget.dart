@@ -46,7 +46,6 @@ class TileWidgetState extends State<TileWidget> {
   }
 
   Widget symbolForTile(TileWidget tileWidget) {
-    double dim = tileWidget.tileDim;
     Tile tile = tileWidget.tile;
     Widget widget;
 
