@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
@@ -8,12 +10,18 @@ void main() {
   test('Tile Setting', () {
     Board board = Board(3);
     Tile tile = board.getSubBoard(0, 0).getTile(0, 0);
-    tile.setTile(TileState.O);
-    expect(tile.getTile(), TileState.O);
-    tile.setTile(TileState.X);
+
+    //Confirms Starts with Player X
+    expect(board.getTurn(), TileState.X);
+    tile.setTile();
+    //Assert that the tile is set to X and the turn is updated
     expect(tile.getTile(), TileState.X);
-    tile.setTile(TileState.none);
-    expect(tile.getTile(), TileState.none);
+    expect(board.getTurn(), TileState.O);
+
+    //Confirm turn and tile are not changed
+    tile.setTile();
+    expect(tile.getTile(), TileState.X);
+    expect(board.getTurn(), TileState.O);
   });
 
   test('Tile Getting', () {
@@ -26,10 +34,7 @@ void main() {
     Tile t = board.getSubBoard(0, 0).getTile(0, 0);
     expect(t.tileSet(), false);
 
-    t.setTile(TileState.O);
-    expect(t.tileSet(), true);
-
-    t.setTile(TileState.X);
+    t.setTile();
     expect(t.tileSet(), true);
   });
 }

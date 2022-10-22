@@ -10,8 +10,13 @@ class Tile {
     return _subBoard;
   }
 
-  void setTile(TileState state) {
-    this.state = state;
+  //setTile and toggle the Board Turn
+  void setTile() {
+    if (tileSet()) {
+      return;
+    }
+    state = _subBoard.getBoard().getTurn();
+    _subBoard.getBoard().nextTurn();
   }
 
   TileState getTile() {

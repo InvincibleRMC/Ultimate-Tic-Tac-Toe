@@ -33,13 +33,9 @@ class TileWidgetState extends State<TileWidget> {
 
     //TODO
     //check if this is a "current board"
-    print("tile pressed");
+
     setState(() {
-      if (tile.tileSet()) {
-        return;
-      }
-      tile.setTile(tile.getSubBoard().getBoard().getTurn());
-      tile.getSubBoard().getBoard().nextTurn();
+      tile.setTile();
     });
     //TODO
     //set board solved if solved
