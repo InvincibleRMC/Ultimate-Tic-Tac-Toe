@@ -3,31 +3,33 @@ import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 class TileWidget extends StatefulWidget {
-  final double tileDim;
-  final Tile tile;
+  final double _tileDim;
+  final Tile _tile;
 
   @override
   State<TileWidget> createState() => TileWidgetState();
 
   const TileWidget({
     Key? key,
-    required this.tileDim,
-    required this.tile,
-  }) : super(key: key);
+    required double tileDim,
+    required Tile tile,
+  })  : _tileDim = tileDim,
+        _tile = tile,
+        super(key: key);
 }
 
 class TileWidgetState extends State<TileWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: widget.tileDim,
+      width: widget._tileDim,
       child: TextButton(
           onPressed: () => {updateTile(widget)}, child: symbolForTile(widget)),
     );
   }
 
   void updateTile(TileWidget widget) {
-    Tile tile = widget.tile;
+    Tile tile = widget._tile;
     //TODO
     //check if board is solved
 
@@ -43,7 +45,7 @@ class TileWidgetState extends State<TileWidget> {
   }
 
   Widget symbolForTile(TileWidget tileWidget) {
-    Tile tile = tileWidget.tile;
+    Tile tile = tileWidget._tile;
     Widget widget;
 
     switch (tile.getTile()) {
