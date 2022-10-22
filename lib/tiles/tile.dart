@@ -17,4 +17,8 @@ class Tile {
   TileState getTile() {
     return state;
   }
+
+  bool tileSet() {
+    return state != TileState.none;
+  }
 }

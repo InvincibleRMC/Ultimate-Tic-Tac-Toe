@@ -51,13 +51,14 @@ class MainBoardWidget extends StatelessWidget {
             ),
           );
         }
-        children.add(Row(children: childrenRow));
+        children.add(Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: childrenRow));
+        // children.add(const SizedBox(width: 0, height: 0));
       }
 
-      return SizedBox(
-          width: _boardWidthPixels,
-          height: _boardHeightPixels,
-          child: Column(children: children));
+      return Column(
+          mainAxisAlignment: MainAxisAlignment.center, children: children);
     });
   }
 }

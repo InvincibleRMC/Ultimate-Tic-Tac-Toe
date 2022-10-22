@@ -4,6 +4,7 @@ import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 class Board {
   final int _size;
   late List<SubBoard> _subBoards;
+
   TileState _turn = TileState.X;
   Board(int size) : _size = size {
     _subBoards = List.filled((size * size), SubBoard(this));

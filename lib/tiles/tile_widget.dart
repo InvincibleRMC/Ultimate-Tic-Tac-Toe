@@ -31,14 +31,23 @@ class TileWidgetState extends State<TileWidget> {
   }
 
   void updateTile(TileWidget widget) {
+    Tile tile = widget.tile;
     //TODO
     //check if board is solved
 
     //TODO
     //check if this is a "current board"
+
     setState(() {
-      widget.tile.setTile(widget.tile.getSubBoard().getBoard().getTurn());
-      widget.tile.getSubBoard().getBoard().nextTurn();
+      //print(tile.tileSet());
+
+      print(tile.tileSet());
+
+      print(tile.getSubBoard().getBoard().getTurn());
+
+      tile.setTile(tile.getSubBoard().getBoard().getTurn());
+      tile.getSubBoard().getBoard().nextTurn();
+      print(tile.getSubBoard().getBoard().getTurn());
     });
     //TODO
     //set board solved if solved

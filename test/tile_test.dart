@@ -20,4 +20,17 @@ void main() {
     Tile tile = board.getSubBoard(0, 0).getTile(0, 0);
     expect(tile.getTile(), TileState.none);
   });
+  test('TileSet?', () {
+    Board board = Board(3);
+    Tile tileOne = board.getSubBoard(0, 0).getTile(0, 0);
+    expect(tileOne.tileSet(), false);
+
+    Tile tileTwo = board.getSubBoard(0, 0).getTile(0, 1);
+    tileTwo.setTile(TileState.O);
+    expect(tileTwo.tileSet(), true);
+
+    Tile tileThree = board.getSubBoard(0, 0).getTile(0, 2);
+    tileTwo.setTile(TileState.X);
+    expect(tileThree.tileSet(), true);
+  });
 }

@@ -64,10 +64,13 @@ class SubBoardWidget extends StatelessWidget {
             ),
           );
         }
-        children.add(Row(children: childrenRow));
+        children.add(Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: childrenRow));
       }
 
-      return SizedBox(width: boardDim, child: Column(children: children));
+      return Column(
+          mainAxisAlignment: MainAxisAlignment.center, children: children);
     });
   }
 }
