@@ -7,7 +7,8 @@ class Board {
 
   TileState _turn = TileState.X;
   Board(int size) : _size = size {
-    _subBoards = List.filled((size * size), SubBoard(this));
+    _subBoards =
+        List<SubBoard>.generate(_size * _size, (int index) => SubBoard(this));
   }
 
   int size() {

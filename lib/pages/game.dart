@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/main_board_widget.dart';
-import 'package:ultimate_tic_tac_toe/tiles/sub_board_widget.dart';
-
 import '../tiles/main_board.dart';
 
 class GamePage extends StatefulWidget {

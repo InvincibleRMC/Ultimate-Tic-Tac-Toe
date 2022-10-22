@@ -57,8 +57,6 @@ class SubBoardWidget extends StatelessWidget {
         for (int j = 0; j < boardCount; j++) {
           childrenRow.add(
             TileWidget(
-              x: i,
-              y: j,
               tileDim: tileDim,
               tile: _subBoard.getTile(i, j),
             ),

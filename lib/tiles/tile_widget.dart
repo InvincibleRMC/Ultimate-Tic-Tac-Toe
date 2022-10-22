@@ -4,8 +4,6 @@ import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 class TileWidget extends StatefulWidget {
   final double tileDim;
-  final int x;
-  final int y;
   final Tile tile;
 
   @override
@@ -14,8 +12,6 @@ class TileWidget extends StatefulWidget {
   const TileWidget({
     Key? key,
     required this.tileDim,
-    required this.x,
-    required this.y,
     required this.tile,
   }) : super(key: key);
 }
@@ -37,17 +33,13 @@ class TileWidgetState extends State<TileWidget> {
 
     //TODO
     //check if this is a "current board"
-
+    print("tile pressed");
     setState(() {
-      //print(tile.tileSet());
-
-      print(tile.tileSet());
-
-      print(tile.getSubBoard().getBoard().getTurn());
-
+      if (tile.tileSet()) {
+        return;
+      }
       tile.setTile(tile.getSubBoard().getBoard().getTurn());
       tile.getSubBoard().getBoard().nextTurn();
-      print(tile.getSubBoard().getBoard().getTurn());
     });
     //TODO
     //set board solved if solved
@@ -60,15 +52,15 @@ class TileWidgetState extends State<TileWidget> {
 
     switch (tile.getTile()) {
       case TileState.none:
-        widget = Container();
+        widget = Container(key: const Key("Empty Tile"));
         break;
 
       case TileState.O:
-        widget = Image.asset('images/o.png');
+        widget = Image.asset('images/o.png', key: const Key("O Tile"));
         break;
 
       case TileState.X:
-        widget = Image.asset('images/x.png');
+        widget = Image.asset('images/x.png', key: const Key("X Tile"));
         break;
     }
     return widget;

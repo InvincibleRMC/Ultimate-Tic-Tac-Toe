@@ -6,7 +6,8 @@ class SubBoard {
   final Board _board;
   late List<Tile> _tiles;
   SubBoard(Board board) : _board = board {
-    _tiles = List.filled(_board.size() * _board.size(), Tile(this));
+    _tiles = List<Tile>.generate(
+        _board.size() * _board.size(), (int index) => Tile(this));
   }
 
   Board getBoard() {
