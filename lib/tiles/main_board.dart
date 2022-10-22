@@ -3,12 +3,14 @@ import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 class Board {
   final int _size;
-  late List<SubBoard> _subBoards;
+  late List<List<SubBoard>> _subBoards;
 
   TileState _turn = TileState.X;
   Board(int size) : _size = size {
-    _subBoards =
-        List<SubBoard>.generate(_size * _size, (int index) => SubBoard(this));
+    _subBoards = List<List<SubBoard>>.generate(
+        _size,
+        (int index) =>
+            List<SubBoard>.generate(_size, (int index) => SubBoard(this)));
   }
 
   int size() {
@@ -16,7 +18,7 @@ class Board {
   }
 
   SubBoard getSubBoard(int i, int j) {
-    return _subBoards.elementAt(i * _size + j);
+    return _subBoards[i][j];
   }
 
   TileState getTurn() {

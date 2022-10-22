@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
+import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
@@ -22,15 +23,13 @@ void main() {
   });
   test('TileSet?', () {
     Board board = Board(3);
-    Tile tileOne = board.getSubBoard(0, 0).getTile(0, 0);
-    expect(tileOne.tileSet(), false);
+    Tile t = board.getSubBoard(0, 0).getTile(0, 0);
+    expect(t.tileSet(), false);
 
-    Tile tileTwo = board.getSubBoard(0, 0).getTile(0, 1);
-    tileTwo.setTile(TileState.O);
-    expect(tileTwo.tileSet(), true);
+    t.setTile(TileState.O);
+    expect(t.tileSet(), true);
 
-    Tile tileThree = board.getSubBoard(0, 0).getTile(0, 2);
-    tileTwo.setTile(TileState.X);
-    expect(tileThree.tileSet(), true);
+    t.setTile(TileState.X);
+    expect(t.tileSet(), true);
   });
 }

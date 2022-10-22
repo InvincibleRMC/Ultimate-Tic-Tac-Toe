@@ -5,7 +5,7 @@ import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 void main() {
-  test('Constructor test', () {
+  test('SubBoard Constructor test', () {
     Board board = Board(3);
     SubBoard sub = board.getSubBoard(0, 0);
     int size = board.size();
@@ -15,13 +15,34 @@ void main() {
       }
     }
   });
-  test('Unique Tile', () {
-    Board board = Board(3);
-    SubBoard sub1 = board.getSubBoard(0, 0);
-    Tile tile1 = sub1.getTile(0, 0);
-    Tile tile2 = sub1.getTile(0, 0);
-    expect(tile1, tile2);
-    Tile tile3 = sub1.getTile(0, 1);
-    expect(tile1 == tile3, false);
+
+  test("SubBoard.getTile()", () {
+    Board b = Board(3);
+    SubBoard s = SubBoard(b);
+
+    Tile tile00 = s.getTile(0, 0);
+    Tile tile00Again = s.getTile(0, 0);
+    //Assert Tile is the same
+    expect(tile00, tile00Again);
+
+    //Assert Tile is unique
+    Tile tile01 = s.getTile(0, 1);
+    expect(tile00 == tile01, false);
+
+    //Assert Negative Out of Bounds is an error
+    expect(() => s.getTile(-1, 0), throwsA(isArgumentError));
+    expect(() => s.getTile(0, -1), throwsA(isArgumentError));
+    expect(() => s.getTile(1, -1), throwsA(isArgumentError));
+    //Assert UpperBound Out of Bounds is an error
+    expect(() => s.getTile(b.size(), b.size()), throwsA(isArgumentError));
+    expect(() => s.getTile(b.size(), 0), throwsA(isArgumentError));
+    expect(() => s.getTile(0, b.size()), throwsA(isArgumentError));
+  });
+  test("SubBoard.getBoard", () {
+    Board b = Board(3);
+    SubBoard s00 = b.getSubBoard(0, 0);
+    SubBoard s01 = b.getSubBoard(0, 0);
+    expect(s00.getBoard(), b);
+    expect(s00.getBoard(), s01.getBoard());
   });
 }

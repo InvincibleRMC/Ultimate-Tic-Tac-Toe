@@ -4,10 +4,12 @@ import 'main_board.dart';
 
 class SubBoard {
   final Board _board;
-  late List<Tile> _tiles;
+  late List<List<Tile>> _tiles;
   SubBoard(Board board) : _board = board {
-    _tiles = List<Tile>.generate(
-        _board.size() * _board.size(), (int index) => Tile(this));
+    _tiles = List<List<Tile>>.generate(
+        _board.size(),
+        (int index) =>
+            List<Tile>.generate(_board.size(), (int index) => Tile(this)));
   }
 
   Board getBoard() {
@@ -15,6 +17,6 @@ class SubBoard {
   }
 
   Tile getTile(int i, int j) {
-    return _tiles.elementAt(i * _board.size() + j);
+    return _tiles[i][j];
   }
 }
