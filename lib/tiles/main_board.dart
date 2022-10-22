@@ -6,7 +6,7 @@ class Board {
   late List<List<SubBoard>> _subBoards;
 
   TileState _turn = TileState.X;
-  Board(int size) : _size = size {
+  Board([int size = 3]) : _size = size {
     _subBoards = List<List<SubBoard>>.generate(
         _size,
         (int index) =>

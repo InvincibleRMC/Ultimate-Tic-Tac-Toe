@@ -5,7 +5,7 @@ import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 void main() {
   test('Turn Change', () {
-    Board board = Board(3);
+    Board board = Board();
     expect(board.getTurn(), TileState.X);
     board.nextTurn();
     expect(board.getTurn(), TileState.O);
@@ -14,7 +14,7 @@ void main() {
   });
 
   test("Board.getSubBoard()", () {
-    Board b = Board(3);
+    Board b = Board();
     // Negative
     expect(() => b.getSubBoard(-1, 0), throwsA(isArgumentError));
     expect(() => b.getSubBoard(0, -1), throwsA(isArgumentError));
@@ -25,7 +25,7 @@ void main() {
     expect(() => b.getSubBoard(0, b.size()), throwsA(isArgumentError));
   });
   test('Unique Subboard', () {
-    Board board = Board(3);
+    Board board = Board();
     SubBoard sub1 = board.getSubBoard(0, 0);
     SubBoard sub2 = board.getSubBoard(0, 0);
     expect(sub1, sub2);

@@ -7,7 +7,7 @@ import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 void main() {
   test('Tile Setting', () {
-    Board board = Board(3);
+    Board board = Board();
     Tile tile = board.getSubBoard(0, 0).getTile(0, 0);
 
     //Confirms Starts with Player X
@@ -24,12 +24,12 @@ void main() {
   });
 
   test('Tile Getting', () {
-    Board board = Board(3);
+    Board board = Board();
     Tile tile = board.getSubBoard(0, 0).getTile(0, 0);
     expect(tile.getTile(), TileState.none);
   });
   test('TileSet?', () {
-    Board board = Board(3);
+    Board board = Board();
     Tile t = board.getSubBoard(0, 0).getTile(0, 0);
     expect(t.tileSet(), false);
 
