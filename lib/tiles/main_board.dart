@@ -39,10 +39,7 @@ class Board extends Solved {
     for (int i = 0; i < _subBoards.length; i++) {
       for (int j = 0; j < _subBoards[0].length; j++) {
         winners[i][j] = getSubBoard(i, j).getWinner();
-        print(winners[i][j]);
-        print("yeet");
       }
-      print("yeetneliwn");
     }
 
     return winners;

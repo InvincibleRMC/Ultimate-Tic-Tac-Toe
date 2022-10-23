@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_widget.dart';
 
-class SubBoardWidget extends StatelessWidget {
+class SubBoardWidget extends StatefulWidget {
   final SubBoard _subBoard;
   final double _boardWidthPixels;
   final double _boardHeightPixels;
+  final Function _notifyBoard;
 
   //TODO make a square not rectangle?
   const SubBoardWidget({
@@ -13,9 +14,11 @@ class SubBoardWidget extends StatelessWidget {
     required SubBoard subBoard,
     required double boardWidthPixels,
     required double boardHeightPixels,
+    required Function notifyBoard,
   })  : _subBoard = subBoard,
         _boardWidthPixels = boardWidthPixels,
         _boardHeightPixels = boardHeightPixels,
+        _notifyBoard = notifyBoard,
         super(key: key);
 
   double getBoardWidthPixels() {
@@ -27,11 +30,16 @@ class SubBoardWidget extends StatelessWidget {
   }
 
   @override
+  State<StatefulWidget> createState() => SubBoardWidgetState();
+}
+
+class SubBoardWidgetState extends State<SubBoardWidget> {
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Image.asset('images/board.png',
-            height: _boardHeightPixels, width: _boardWidthPixels),
+            height: widget._boardHeightPixels, width: widget._boardWidthPixels),
         Container(
             //So X and Os line up
             //TODO
@@ -44,9 +52,21 @@ class SubBoardWidget extends StatelessWidget {
     );
   }
 
+  void subBoardRefresh(BuildContext context, SubBoard s) {
+    setState(() {
+      if (s.solved(s.getTileWinners())) {
+        s.setWinner(s.winner(s.getTileWinners()));
+        //TODO
+        //update image or something
+      }
+
+      widget._notifyBoard(context, s.getBoard());
+    });
+  }
+
   Widget subBoardTiles() {
     return Builder(builder: (context) {
-      final int boardCount = _subBoard.getBoard().size();
+      final int boardCount = widget._subBoard.getBoard().size();
       final boardDim = MediaQuery.of(context).size.width / boardCount;
       final tileDim = boardDim / boardCount;
 
@@ -58,7 +78,8 @@ class SubBoardWidget extends StatelessWidget {
           childrenRow.add(
             TileWidget(
               tileDim: tileDim,
-              tile: _subBoard.getTile(i, j),
+              tile: widget._subBoard.getTile(i, j),
+              notifySubBoard: subBoardRefresh,
             ),
           );
         }

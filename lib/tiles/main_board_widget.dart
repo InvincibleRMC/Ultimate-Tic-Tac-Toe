@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board_widget.dart';
 
-class MainBoardWidget extends StatelessWidget {
+import '../pages/game_conclusion.dart';
+
+class MainBoardWidget extends StatefulWidget {
   final Board _board;
   final double _boardWidthPixels;
   final double _boardHeightPixels;
@@ -27,16 +29,34 @@ class MainBoardWidget extends StatelessWidget {
   }
 
   @override
+  State<StatefulWidget> createState() => MainBoardWidgetState();
+}
+
+class MainBoardWidgetState extends State<MainBoardWidget> {
+  @override
   Widget build(BuildContext context) {
     return gameBoard();
+  }
+
+  void boardRefresh(BuildContext context, Board b) {
+    setState(() {
+      print(b.solved(b.getSubBoardWinners()));
+      if (b.solved(b.getSubBoardWinners())) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const GameConclusion(),
+            ));
+      }
+    });
   }
 
   Widget gameBoard() {
     return Builder(builder: (context) {
       const int boardCount = 3;
 
-      final subBoardHeight = _boardHeightPixels / boardCount;
-      final subBoardWidth = _boardWidthPixels / boardCount;
+      final subBoardHeight = widget._boardHeightPixels / boardCount;
+      final subBoardWidth = widget._boardWidthPixels / boardCount;
 
       final children = <Widget>[];
 
@@ -45,9 +65,10 @@ class MainBoardWidget extends StatelessWidget {
         for (int j = 0; j < boardCount; j++) {
           childrenRow.add(
             SubBoardWidget(
-              subBoard: _board.getSubBoard(i, j),
+              subBoard: widget._board.getSubBoard(i, j),
               boardWidthPixels: subBoardWidth,
               boardHeightPixels: subBoardHeight,
+              notifyBoard: boardRefresh,
             ),
           );
         }

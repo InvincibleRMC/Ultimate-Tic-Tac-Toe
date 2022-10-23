@@ -1,6 +1,8 @@
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
+import 'main_board.dart';
+
 class Tile {
   final SubBoard _subBoard;
   TileState state = TileState.none;
@@ -12,11 +14,18 @@ class Tile {
 
   //setTile and toggle the Board Turn
   void setTile() {
+    Board b = _subBoard.getBoard();
+    if (b.solved(b.getSubBoardWinners())) {
+      return;
+    }
+    if (_subBoard.solved(_subBoard.getTileWinners())) {
+      return;
+    }
     if (tileSet()) {
       return;
     }
-    state = _subBoard.getBoard().getTurn();
-    _subBoard.getBoard().nextTurn();
+    state = b.getTurn();
+    b.nextTurn();
   }
 
   TileState getTile() {

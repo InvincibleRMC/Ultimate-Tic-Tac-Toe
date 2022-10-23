@@ -5,6 +5,7 @@ import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 class TileWidget extends StatefulWidget {
   final double _tileDim;
   final Tile _tile;
+  final Function _notifySubBoard;
 
   @override
   State<TileWidget> createState() => TileWidgetState();
@@ -13,8 +14,10 @@ class TileWidget extends StatefulWidget {
     Key? key,
     required double tileDim,
     required Tile tile,
+    required Function notifySubBoard,
   })  : _tileDim = tileDim,
         _tile = tile,
+        _notifySubBoard = notifySubBoard,
         super(key: key);
 }
 
@@ -24,24 +27,17 @@ class TileWidgetState extends State<TileWidget> {
     return SizedBox(
       width: widget._tileDim,
       child: TextButton(
-          onPressed: () => {updateTile(widget)}, child: symbolForTile(widget)),
+        onPressed: () => {updateTile(context, widget)},
+        child: symbolForTile(widget),
+      ),
     );
   }
 
-  void updateTile(TileWidget widget) {
-    Tile tile = widget._tile;
-    //TODO
-    //check if board is solved
-
-    //TODO
-    //check if this is a "current board"
-
+  void updateTile(BuildContext context, TileWidget widget) {
     setState(() {
-      tile.setTile();
+      widget._tile.setTile();
+      widget._notifySubBoard(context, widget._tile.getSubBoard());
     });
-    //TODO
-    //set board solved if solved
-    //If solved draw an X or O over the board
   }
 
   Widget symbolForTile(TileWidget tileWidget) {

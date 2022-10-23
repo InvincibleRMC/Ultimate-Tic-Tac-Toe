@@ -11,7 +11,7 @@ void main() {
     const keyEmpty = Key("Empty Tile");
     const keyO = Key("O Tile");
     const keyX = Key("X Tile");
-    TileWidget tw = TileWidget(tileDim: 40, tile: tile);
+    TileWidget tw = TileWidget(tileDim: 40, tile: tile, notifySubBoard: );
 
     await tester.pumpWidget(
         Directionality(textDirection: TextDirection.ltr, child: tw));
