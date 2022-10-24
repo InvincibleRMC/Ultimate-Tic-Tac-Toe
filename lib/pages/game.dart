@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ultimate_tic_tac_toe/tiles/main_board_widget.dart';
-import '../tiles/main_board.dart';
+import 'package:ultimate_tic_tac_toe/tiles/board_widget.dart';
+import '../tiles/board.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key});
@@ -20,7 +20,7 @@ class _GamePageState extends State<GamePage> {
     return MaterialApp(
         home: Scaffold(
       body: Center(
-          child: MainBoardWidget(
+          child: BoardWidget(
         board: board,
         boardWidthPixels: mainBoardWidth,
         boardHeightPixels: mainBoardHeight,

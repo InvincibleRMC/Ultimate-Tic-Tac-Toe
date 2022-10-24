@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
+import 'package:ultimate_tic_tac_toe/tiles/board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board_widget.dart';
 
 import '../pages/game_conclusion.dart';
 
-class MainBoardWidget extends StatefulWidget {
+class BoardWidget extends StatefulWidget {
   final Board _board;
   final double _boardWidthPixels;
   final double _boardHeightPixels;
 
   //TODO make a square not rectangle?
-  const MainBoardWidget({
+  const BoardWidget({
     Key? key,
     required Board board,
     required double boardWidthPixels,
@@ -29,10 +29,10 @@ class MainBoardWidget extends StatefulWidget {
   }
 
   @override
-  State<StatefulWidget> createState() => MainBoardWidgetState();
+  State<StatefulWidget> createState() => BoardWidgetState();
 }
 
-class MainBoardWidgetState extends State<MainBoardWidget> {
+class BoardWidgetState extends State<BoardWidget> {
   @override
   Widget build(BuildContext context) {
     return gameBoard();

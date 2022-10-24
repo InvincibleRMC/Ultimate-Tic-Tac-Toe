@@ -1,7 +1,7 @@
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
-import 'main_board.dart';
+import 'board.dart';
 
 class Tile {
   final SubBoard _subBoard;
