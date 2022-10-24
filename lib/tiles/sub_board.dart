@@ -9,10 +9,8 @@ class SubBoard extends Solved {
   late List<List<Tile>> _tiles;
   TileState _winner = TileState.none;
   SubBoard(Board board) : _board = board {
-    _tiles = List<List<Tile>>.generate(
-        _board.size(),
-        (int i) =>
-            List<Tile>.generate(_board.size(), (int j) => Tile(this, i, j)));
+    _tiles = List<List<Tile>>.generate(_board.size(),
+        (int i) => List<Tile>.generate(_board.size(), (int j) => Tile(this)));
   }
 
   Board getBoard() {

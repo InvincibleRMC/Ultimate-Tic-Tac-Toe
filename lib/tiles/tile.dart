@@ -5,13 +5,8 @@ import 'main_board.dart';
 
 class Tile {
   final SubBoard _subBoard;
-  final int _i;
-  final int _j;
   TileState state = TileState.none;
-  Tile(SubBoard subBoard, int i, int j)
-      : _subBoard = subBoard,
-        _i = i,
-        _j = j;
+  Tile(SubBoard subBoard) : _subBoard = subBoard;
 
   SubBoard getSubBoard() {
     return _subBoard;
@@ -36,7 +31,7 @@ class Tile {
     }
     state = b.getTurn();
     b.nextTurn();
-    b.setCurrentSubboard(_i, _j);
+    b.setCurrentSubboard(_subBoard);
   }
 
   TileState getTile() {

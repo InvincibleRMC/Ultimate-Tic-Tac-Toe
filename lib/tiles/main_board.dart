@@ -49,12 +49,11 @@ class Board extends Solved {
     return _currentSB;
   }
 
-  void setCurrentSubboard(int i, int j) {
-    SubBoard s = getSubBoard(i, j);
-    if (s.solved(s.getTileWinners())) {
+  void setCurrentSubboard(SubBoard sb) {
+    if (sb.solved(sb.getTileWinners())) {
       _currentSB = null;
     } else {
-      _currentSB = s;
+      _currentSB = sb;
     }
   }
 }
