@@ -38,6 +38,7 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
     return gameBoard();
   }
 
+//TODO tie state
   void boardRefresh(BuildContext context, Board b) {
     setState(() {
       if (b.solved(b.getSubBoardWinners())) {

@@ -22,7 +22,7 @@ class _GameConclusionState extends State<GameConclusion> {
         ),
       ),
       body: Center(
-        child: Column(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
