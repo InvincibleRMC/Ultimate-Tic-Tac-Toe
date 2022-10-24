@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
+import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_widget.dart';
 
 class SubBoardWidget extends StatefulWidget {
@@ -36,28 +37,13 @@ class SubBoardWidget extends StatefulWidget {
 class SubBoardWidgetState extends State<SubBoardWidget> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image.asset('images/board.png',
-            height: widget._boardHeightPixels, width: widget._boardWidthPixels),
-        Container(
-            //So X and Os line up
-            //TODO
-            // Could maybe be done better
-            padding: const EdgeInsets.symmetric(
-              vertical: 70.0,
-            ),
-            child: subBoardTiles()),
-      ],
-    );
+    return subBoardTiles();
   }
 
   void subBoardRefresh(BuildContext context, SubBoard s) {
     setState(() {
       if (s.solved(s.getTileWinners())) {
         s.setWinner(s.winner(s.getTileWinners()));
-        //TODO
-        //update image or something
       }
 
       widget._notifyBoard(context, s.getBoard());
@@ -88,8 +74,44 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
             children: childrenRow));
       }
 
-      return Column(
+      // final stack = Stack();
+      Widget w = symbolForTile(widget._subBoard.getWinner(), widget);
+
+      Column col = Column(
           mainAxisAlignment: MainAxisAlignment.center, children: children);
+
+      Image img = Image.asset('images/board.png',
+          height: widget._boardHeightPixels, width: widget._boardWidthPixels);
+
+      return Stack(
+        alignment: Alignment.center,
+        children: [w, img, col],
+      );
     });
+  }
+
+  Widget symbolForTile(TileState winner, SubBoardWidget subBoardWidget) {
+    Widget widget;
+
+    switch (winner) {
+      case TileState.none:
+        widget = Container(key: const Key("Empty Tile"));
+        break;
+
+      case TileState.O:
+        widget = Image.asset('images/o.png',
+            key: const Key("O Tile"),
+            height: subBoardWidget._boardHeightPixels,
+            width: subBoardWidget._boardWidthPixels);
+        break;
+
+      case TileState.X:
+        widget = Image.asset('images/x.png',
+            key: const Key("X Tile"),
+            height: subBoardWidget._boardHeightPixels,
+            width: subBoardWidget._boardWidthPixels);
+        break;
+    }
+    return widget;
   }
 }

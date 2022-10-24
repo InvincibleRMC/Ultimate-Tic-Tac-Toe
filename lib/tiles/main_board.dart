@@ -1,11 +1,11 @@
 import 'package:ultimate_tic_tac_toe/tiles/solved.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
-import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 class Board extends Solved {
   final int _size;
   late List<List<SubBoard>> _subBoards;
+  SubBoard? _currentSB;
 
   TileState _turn = TileState.X;
   Board([int size = 3]) : _size = size {
@@ -43,5 +43,18 @@ class Board extends Solved {
     }
 
     return winners;
+  }
+
+  SubBoard? getCurrentSubboard() {
+    return _currentSB;
+  }
+
+  void setCurrentSubboard(int i, int j) {
+    SubBoard s = getSubBoard(i, j);
+    if (s.solved(s.getTileWinners())) {
+      _currentSB = null;
+    } else {
+      _currentSB = s;
+    }
   }
 }

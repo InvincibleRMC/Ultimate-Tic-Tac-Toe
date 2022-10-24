@@ -11,8 +11,8 @@ class SubBoard extends Solved {
   SubBoard(Board board) : _board = board {
     _tiles = List<List<Tile>>.generate(
         _board.size(),
-        (int index) =>
-            List<Tile>.generate(_board.size(), (int index) => Tile(this)));
+        (int i) =>
+            List<Tile>.generate(_board.size(), (int j) => Tile(this, i, j)));
   }
 
   Board getBoard() {

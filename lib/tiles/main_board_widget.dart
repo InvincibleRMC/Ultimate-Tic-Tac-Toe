@@ -40,7 +40,6 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
 
   void boardRefresh(BuildContext context, Board b) {
     setState(() {
-      print(b.solved(b.getSubBoardWinners()));
       if (b.solved(b.getSubBoardWinners())) {
         Navigator.push(
             context,

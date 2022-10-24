@@ -1,5 +1,3 @@
-import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
-import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 abstract class Solved {
