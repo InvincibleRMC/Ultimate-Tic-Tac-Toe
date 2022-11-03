@@ -32,6 +32,9 @@ class Tile {
     state = b.getTurn();
     b.nextTurn();
     b.setCurrentSubboard(_subBoard);
+    //if (_subBoard.solved(_subBoard.getTileWinners())) {
+    _subBoard.setWinner(_subBoard.winner(_subBoard.getTileWinners()));
+    // }
   }
 
   TileState getTile() {

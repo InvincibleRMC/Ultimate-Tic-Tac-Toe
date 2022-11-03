@@ -42,10 +42,6 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
 
   void subBoardRefresh(BuildContext context, SubBoard s) {
     setState(() {
-      if (s.solved(s.getTileWinners())) {
-        s.setWinner(s.winner(s.getTileWinners()));
-      }
-
       widget._notifyBoard(context, s.getBoard());
     });
   }
