@@ -1,59 +1,42 @@
+import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/solved.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 class Board extends Solved {
   final int _size;
-  late List<List<SubBoard>> _subBoards;
-  SubBoard? _currentSB;
+  int _childCount;
+  //List<List<T>> _data;
+  TileState _winner = TileState.none;
+  //List<List<TileState>> winners;
 
-  TileState _turn = TileState.X;
-  Board([int size = 3]) : _size = size {
-    _subBoards = List<List<SubBoard>>.generate(
-        _size,
-        (int index) =>
-            List<SubBoard>.generate(_size, (int index) => SubBoard(this)));
-  }
+  Board([int size = 3])
+      : _size = size,
+        _childCount = size * size
+  // winners = List<List<TileState>>.generate(size,(int index) =>List<TileState>.generate(size, (int index) => TileState.none)
+  ;
 
   int size() {
     return _size;
   }
 
-  SubBoard getSubBoard(int i, int j) {
-    return _subBoards[i][j];
+  bool emptyChild() {
+    return _childCount == 0;
   }
 
-  TileState getTurn() {
-    return _turn;
+  void setChildEmpty() {
+    _childCount = 0;
   }
 
-  void nextTurn() {
-    _turn = (_turn == TileState.X) ? TileState.O : TileState.X;
+  void placedAChild() {
+    _childCount--;
   }
 
-  List<List<TileState>> getSubBoardWinners() {
-    List<List<TileState>> winners = List<List<TileState>>.generate(
-        _size,
-        (int index) =>
-            List<TileState>.generate(_size, (int index) => TileState.none));
-    for (int i = 0; i < _subBoards.length; i++) {
-      for (int j = 0; j < _subBoards[0].length; j++) {
-        winners[i][j] = getSubBoard(i, j).getWinner();
-      }
-    }
-
-    return winners;
+  void setWinner(TileState t) {
+    _winner = t;
   }
 
-  SubBoard? getCurrentSubboard() {
-    return _currentSB;
-  }
-
-  void setCurrentSubboard(SubBoard sb) {
-    if (sb.solved(sb.getTileWinners())) {
-      _currentSB = null;
-    } else {
-      _currentSB = sb;
-    }
+  TileState getWinner() {
+    return _winner;
   }
 }

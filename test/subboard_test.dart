@@ -1,12 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ultimate_tic_tac_toe/tiles/board.dart';
+import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 void main() {
   test('SubBoard Constructor test', () {
-    Board board = Board();
+    MainBoard board = MainBoard();
     SubBoard sub = board.getSubBoard(0, 0);
     int size = board.size();
     for (int i = 0; i < size; i++) {
@@ -17,7 +17,7 @@ void main() {
   });
 
   test("SubBoard.getTile()", () {
-    Board b = Board();
+    MainBoard b = MainBoard();
     SubBoard s = SubBoard(b);
 
     Tile tile00 = s.getTile(0, 0);
@@ -39,7 +39,7 @@ void main() {
     expect(() => s.getTile(0, b.size()), throwsA(isArgumentError));
   });
   test("SubBoard.getBoard", () {
-    Board b = Board();
+    MainBoard b = MainBoard();
     SubBoard s00 = b.getSubBoard(0, 0);
     SubBoard s01 = b.getSubBoard(0, 0);
     expect(s00.getBoard(), b);

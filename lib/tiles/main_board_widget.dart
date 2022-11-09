@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:ultimate_tic_tac_toe/tiles/board.dart';
+import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board_widget.dart';
 
 import '../pages/game_conclusion.dart';
 
 class BoardWidget extends StatefulWidget {
-  final Board _board;
+  final MainBoard _board;
   final double _boardWidthPixels;
   final double _boardHeightPixels;
 
   //TODO make a square not rectangle?
   const BoardWidget({
     Key? key,
-    required Board board,
+    required MainBoard board,
     required double boardWidthPixels,
     required double boardHeightPixels,
   })  : _board = board,
@@ -38,10 +38,9 @@ class BoardWidgetState extends State<BoardWidget> {
     return gameBoard();
   }
 
-//TODO tie state
-  void boardRefresh(BuildContext context, Board b) {
+  void boardRefresh(BuildContext context, MainBoard b) {
     setState(() {
-      if (b.solved(b.getSubBoardWinners())) {
+      if (b.solved(b.getSubBoardWinners()) || b.emptyChild()) {
         Navigator.push(
             context,
             MaterialPageRoute(

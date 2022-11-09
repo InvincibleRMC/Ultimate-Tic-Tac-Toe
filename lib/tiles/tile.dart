@@ -1,20 +1,26 @@
+import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
-import 'board.dart';
+import 'main_board.dart';
 
 class Tile {
   final SubBoard _subBoard;
-  TileState state = TileState.none;
+  TileState _state = TileState.none;
   Tile(SubBoard subBoard) : _subBoard = subBoard;
 
   SubBoard getSubBoard() {
     return _subBoard;
   }
 
-  //setTile and toggle the Board Turn
-  void setTile() {
-    Board b = _subBoard.getBoard();
+  @visibleForTesting
+  void setTile(TileState t) {
+    _state = t;
+  }
+
+  //placeTile and toggle the Board Turn
+  void placeTile() {
+    MainBoard b = _subBoard.getBoard();
     if (b.solved(b.getSubBoardWinners())) {
       return;
     }
@@ -24,24 +30,38 @@ class Tile {
     if (tileSet()) {
       return;
     }
-    if (b.getCurrentSubboard() != null) {
-      if (_subBoard != b.getCurrentSubboard()) {
-        return;
-      }
+
+    if (_subBoard != b.getCurrentSubboard() && b.getCurrentSubboard() != null) {
+      return;
     }
-    state = b.getTurn();
+
+    List<int> loc = _subBoard.getPointFromTile(this);
+
+    _state = b.getTurn();
     b.nextTurn();
-    b.setCurrentSubboard(_subBoard);
-    //if (_subBoard.solved(_subBoard.getTileWinners())) {
-    _subBoard.setWinner(_subBoard.winner(_subBoard.getTileWinners()));
-    // }
+    _subBoard.placedAChild();
+
+    SubBoard s = b.getSubBoard(loc[0], loc[1]);
+    if (!s.emptyChild()) {
+      b.setCurrentSubboard(s);
+    } else {
+      b.setCurrentSubboard(null);
+      //return;
+    }
+
+    if (!_subBoard.getSolvedOnce() &&
+        _subBoard.solved(_subBoard.getTileWinners())) {
+      _subBoard.setChildEmpty();
+      _subBoard.setWinner(_subBoard.winner(_subBoard.getTileWinners()));
+      b.placedAChild();
+    }
   }
 
   TileState getTile() {
-    return state;
+    return _state;
   }
 
   bool tileSet() {
-    return state != TileState.none;
+    return _state != TileState.none;
   }
 }

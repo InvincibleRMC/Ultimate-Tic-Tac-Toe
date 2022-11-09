@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ultimate_tic_tac_toe/tiles/board.dart';
+import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_widget.dart';
 
 void main() {
   testWidgets("Tile Widget Test", (tester) async {
-    Board b = Board();
+    MainBoard b = MainBoard();
     Tile tile = b.getSubBoard(0, 0).getTile(0, 0);
     const keyEmpty = Key("Empty Tile");
     const keyO = Key("O Tile");

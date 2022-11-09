@@ -1,15 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ultimate_tic_tac_toe/tiles/board.dart';
+import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 void main() {
   test('Solved test', () {
-    Board b = Board();
+    MainBoard b = MainBoard();
     b.solved(b.getSubBoardWinners());
     expect(b.solved(b.getSubBoardWinners()), false);
   });
   test('Solved Diagonal test', () {
-    Board b = Board();
+    MainBoard b = MainBoard();
     //Checking Left Diagonal
 
     expect(b.solved(b.getSubBoardWinners()), false);
@@ -30,7 +30,7 @@ void main() {
     expect(b.solved(b.getSubBoardWinners()), false);
   });
   test('Solved Horizontal test', () {
-    Board b = Board();
+    MainBoard b = MainBoard();
 
     expect(b.solved(b.getSubBoardWinners()), false);
     b.getSubBoard(0, 0).setWinner(TileState.X);
@@ -41,7 +41,7 @@ void main() {
     expect(b.solved(b.getSubBoardWinners()), false);
   });
   test('Solved Vertical test', () {
-    Board b = Board();
+    MainBoard b = MainBoard();
 
     expect(b.solved(b.getSubBoardWinners()), false);
     b.getSubBoard(0, 0).setWinner(TileState.X);

@@ -1,19 +1,22 @@
+import 'package:ultimate_tic_tac_toe/tiles/board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/solved.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
-import 'board.dart';
+import 'main_board.dart';
 
-class SubBoard extends Solved {
-  final Board _board;
+class SubBoard extends Board {
+  final MainBoard _board;
   late List<List<Tile>> _tiles;
-  TileState _winner = TileState.none;
-  SubBoard(Board board) : _board = board {
+
+  SubBoard(MainBoard board)
+      : _board = board,
+        super(board.size()) {
     _tiles = List<List<Tile>>.generate(_board.size(),
         (int i) => List<Tile>.generate(_board.size(), (int j) => Tile(this)));
   }
 
-  Board getBoard() {
+  MainBoard getBoard() {
     return _board;
   }
 
@@ -21,12 +24,20 @@ class SubBoard extends Solved {
     return _tiles[i][j];
   }
 
-  void setWinner(TileState winner) {
-    _winner = winner;
-  }
-
-  TileState getWinner() {
-    return _winner;
+  List<int> getPointFromTile(Tile t) {
+    int locI = -1, locJ = -1;
+    for (int i = 0; i < _tiles.length; i++) {
+      for (int j = 0; j < _tiles[0].length; j++) {
+        if (_tiles[i][j] == t) {
+          locI = i;
+          locJ = j;
+        }
+      }
+    }
+    if (locI == -1 || locJ == -1) {
+      throw Error();
+    }
+    return [locI, locJ];
   }
 
   List<List<TileState>> getTileWinners() {

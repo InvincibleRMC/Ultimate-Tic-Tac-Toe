@@ -35,7 +35,7 @@ class TileWidgetState extends State<TileWidget> {
 
   void updateTile(BuildContext context, TileWidget widget) {
     setState(() {
-      widget._tile.setTile();
+      widget._tile.placeTile();
       widget._notifySubBoard(context, widget._tile.getSubBoard());
     });
   }
