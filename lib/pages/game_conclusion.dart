@@ -3,7 +3,7 @@ import 'package:ultimate_tic_tac_toe/pages/home.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 import 'game.dart';
 
-class GameConclusion extends StatefulWidget {
+class GameConclusion extends StatelessWidget {
   const GameConclusion({
     Key? key,
     required TileState winner,
@@ -11,21 +11,16 @@ class GameConclusion extends StatefulWidget {
         super(key: key);
 
   final TileState _winner;
-  final String title = "Victory Screen";
-  final String home = "Return to Home";
-  final String game = "Another game";
-  @override
-  State<GameConclusion> createState() => _GameConclusionState();
-}
+  final String _home = "Return to Home";
+  final String _game = "Another game";
 
-class _GameConclusionState extends State<GameConclusion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          _winnerToString(widget._winner),
+          _winnerToString(_winner),
         ),
       ),
       body: Center(
@@ -40,7 +35,7 @@ class _GameConclusionState extends State<GameConclusion> {
                       builder: (context) => const HomePage(),
                     ));
               },
-              child: Text(widget.home),
+              child: Text(_home),
             ),
             ElevatedButton(
                 onPressed: () {
@@ -50,7 +45,7 @@ class _GameConclusionState extends State<GameConclusion> {
                         builder: (context) => const GamePage(),
                       ));
                 },
-                child: Text(widget.game))
+                child: Text(_game))
           ],
         ),
       ),

@@ -3,23 +3,18 @@ import 'package:ultimate_tic_tac_toe/pages/settings.dart';
 
 import 'game_settings.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
-  final String title = "Home";
-  final String gameSettings = "Play Game";
-  final String settings = "Settings";
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+  final String _title = "Home";
+  final String _gameSettings = "Play Game";
+  final String _settings = "Settings";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          widget.title,
+          _title,
         ),
       ),
       body: Center(
@@ -34,7 +29,7 @@ class _HomePageState extends State<HomePage> {
                       builder: (context) => const GameSettings(),
                     ));
               },
-              child: Text(widget.gameSettings),
+              child: Text(_gameSettings),
             ),
             ElevatedButton(
                 onPressed: () {
@@ -44,7 +39,7 @@ class _HomePageState extends State<HomePage> {
                         builder: (context) => const AppSettings(),
                       ));
                 },
-                child: Text(widget.settings))
+                child: Text(_settings))
           ],
         ),
       ),
