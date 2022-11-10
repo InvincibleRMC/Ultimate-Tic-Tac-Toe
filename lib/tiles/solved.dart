@@ -1,22 +1,8 @@
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 abstract class Solved {
-  bool _solvedOnce = false;
-
-  bool getSolvedOnce() {
-    return _solvedOnce;
-  }
-
   bool solved(List<List<TileState>> tiles) {
-    if (_solvedOnce) {
-      return true;
-    }
-
-    if (winner(tiles) != TileState.none) {
-      _solvedOnce = true;
-    }
-
-    return _solvedOnce;
+    return winner(tiles) != TileState.none;
   }
 
   TileState winner(List<List<TileState>> tiles) {

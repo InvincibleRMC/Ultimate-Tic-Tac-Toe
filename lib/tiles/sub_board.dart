@@ -1,8 +1,6 @@
 import 'package:ultimate_tic_tac_toe/tiles/board.dart';
-import 'package:ultimate_tic_tac_toe/tiles/solved.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
-
 import 'main_board.dart';
 
 class SubBoard extends Board {
