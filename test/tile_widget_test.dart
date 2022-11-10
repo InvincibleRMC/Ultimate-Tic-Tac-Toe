@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
+import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_widget.dart';
 
@@ -11,8 +12,10 @@ void main() {
     const keyEmpty = Key("Empty Tile");
     const keyO = Key("O Tile");
     const keyX = Key("X Tile");
-    TileWidget tw =
-        TileWidget(tileDim: 40, tile: tile, notifySubBoard: () => {});
+    TileWidget tw = TileWidget(
+        tileDim: 40,
+        tile: tile,
+        notifySubBoard: (BuildContext context, SubBoard sb) => {});
 
     await tester.pumpWidget(
         Directionality(textDirection: TextDirection.ltr, child: tw));
