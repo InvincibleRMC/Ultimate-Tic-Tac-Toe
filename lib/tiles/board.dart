@@ -12,9 +12,7 @@ class Board extends Solved {
 
   Board([int size = 3])
       : _size = size,
-        _childCount = size * size
-  // winners = List<List<TileState>>.generate(size,(int index) =>List<TileState>.generate(size, (int index) => TileState.none)
-  ;
+        _childCount = size * size;
 
   int size() {
     return _size;

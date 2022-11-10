@@ -9,6 +9,7 @@ class MainBoard extends Board {
   SubBoard? _currentSB;
 
   TileState _turn = TileState.X;
+
   MainBoard([int size = 3]) : super(size) {
     _subBoards = List<List<SubBoard>>.generate(
         size,

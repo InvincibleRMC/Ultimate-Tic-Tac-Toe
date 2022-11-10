@@ -46,11 +46,9 @@ class Tile {
       b.setCurrentSubboard(s);
     } else {
       b.setCurrentSubboard(null);
-      //return;
     }
 
-    if (!_subBoard.getSolvedOnce() &&
-        _subBoard.solved(_subBoard.getTileWinners())) {
+    if (_subBoard.solved(_subBoard.getTileWinners())) {
       _subBoard.setChildEmpty();
       _subBoard.setWinner(_subBoard.winner(_subBoard.getTileWinners()));
       b.placedAChild();

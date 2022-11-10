@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board_widget.dart';
+import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 import '../pages/game_conclusion.dart';
 
@@ -41,10 +42,12 @@ class BoardWidgetState extends State<BoardWidget> {
   void boardRefresh(BuildContext context, MainBoard b) {
     setState(() {
       if (b.solved(b.getSubBoardWinners()) || b.emptyChild()) {
+        TileState winner = b.winner(b.getSubBoardWinners());
+
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const GameConclusion(),
+              builder: (context) => GameConclusion(winner: winner),
             ));
       }
     });

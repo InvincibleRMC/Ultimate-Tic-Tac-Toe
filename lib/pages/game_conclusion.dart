@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/pages/home.dart';
+import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 import 'game.dart';
 
 class GameConclusion extends StatefulWidget {
-  const GameConclusion({super.key});
+  const GameConclusion({
+    Key? key,
+    required TileState winner,
+  })  : _winner = winner,
+        super(key: key);
+
+  final TileState _winner;
   final String title = "Victory Screen";
   final String home = "Return to Home";
   final String game = "Another game";
@@ -18,7 +25,7 @@ class _GameConclusionState extends State<GameConclusion> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          widget.title,
+          _winnerToString(widget._winner),
         ),
       ),
       body: Center(
@@ -48,5 +55,18 @@ class _GameConclusionState extends State<GameConclusion> {
         ),
       ),
     );
+  }
+}
+
+String _winnerToString(TileState t) {
+  switch (t) {
+    case TileState.none:
+      return "Tie!";
+
+    case TileState.O:
+      return "O Player Wins!";
+
+    case TileState.X:
+      return "X Player Wins!";
   }
 }
