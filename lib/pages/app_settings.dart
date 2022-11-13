@@ -19,6 +19,7 @@ class AppSettings extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
+              key: const Key("home_button"),
               onPressed: () {
                 Navigator.push(
                     context,

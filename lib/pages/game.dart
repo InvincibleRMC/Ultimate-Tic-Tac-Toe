@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ultimate_tic_tac_toe/tiles/main_board_widget.dart';
+import 'package:ultimate_tic_tac_toe/tiles/widget/main_board_widget.dart';
 import '../tiles/main_board.dart';
 
 class GamePage extends StatelessWidget {
@@ -15,7 +15,7 @@ class GamePage extends StatelessWidget {
     return MaterialApp(
         home: Scaffold(
       body: Center(
-          child: BoardWidget(
+          child: MainBoardWidget(
         board: board,
         boardWidthPixels: mainBoardWidth,
         boardHeightPixels: mainBoardHeight,

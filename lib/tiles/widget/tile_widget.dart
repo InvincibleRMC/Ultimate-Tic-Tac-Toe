@@ -27,13 +27,13 @@ class TileWidgetState extends State<TileWidget> {
     return SizedBox(
       width: widget._tileDim,
       child: TextButton(
-        onPressed: () => {updateTile(context, widget)},
+        onPressed: () => {_updateTile(context, widget)},
         child: symbolForTile(widget),
       ),
     );
   }
 
-  void updateTile(BuildContext context, TileWidget widget) {
+  void _updateTile(BuildContext context, TileWidget widget) {
     setState(() {
       widget._tile.placeTile();
       widget._notifySubBoard(context, widget._tile.getSubBoard());

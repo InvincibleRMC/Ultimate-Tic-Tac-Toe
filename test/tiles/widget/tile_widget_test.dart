@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
-import 'package:ultimate_tic_tac_toe/tiles/tile_widget.dart';
+import 'package:ultimate_tic_tac_toe/tiles/widget/tile_widget.dart';
 
 void main() {
   testWidgets("Tile Widget Test", (tester) async {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
-import 'package:ultimate_tic_tac_toe/tiles/tile_widget.dart';
+import 'package:ultimate_tic_tac_toe/tiles/widget/tile_widget.dart';
 
 class SubBoardWidget extends StatefulWidget {
   final SubBoard _subBoard;
@@ -22,14 +22,6 @@ class SubBoardWidget extends StatefulWidget {
         _notifyBoard = notifyBoard,
         super(key: key);
 
-  double getBoardWidthPixels() {
-    return _boardWidthPixels;
-  }
-
-  double getBoardHeightPixels() {
-    return _boardHeightPixels;
-  }
-
   @override
   State<StatefulWidget> createState() => SubBoardWidgetState();
 }
@@ -40,7 +32,7 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
     return subBoardTiles();
   }
 
-  void subBoardRefresh(BuildContext context, SubBoard s) {
+  void _subBoardRefresh(BuildContext context, SubBoard s) {
     setState(() {
       widget._notifyBoard(context, s.getBoard());
     });
@@ -61,7 +53,7 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
             TileWidget(
               tileDim: tileDim,
               tile: widget._subBoard.getTile(i, j),
-              notifySubBoard: subBoardRefresh,
+              notifySubBoard: _subBoardRefresh,
             ),
           );
         }
@@ -89,21 +81,23 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
   Widget symbolForTile(TileState winner, SubBoardWidget subBoardWidget) {
     Widget widget;
 
+    String stringKeySBW = subBoardWidget.key.toString();
+
     switch (winner) {
       case TileState.none:
-        widget = Container(key: const Key("Empty Tile"));
+        widget = Container(key: Key("$stringKeySBW Empty Tile"));
         break;
 
       case TileState.O:
         widget = Image.asset('images/o.png',
-            key: const Key("O Tile"),
+            key: Key("$stringKeySBW O Tile"),
             height: subBoardWidget._boardHeightPixels,
             width: subBoardWidget._boardWidthPixels);
         break;
 
       case TileState.X:
         widget = Image.asset('images/x.png',
-            key: const Key("X Tile"),
+            key: Key("$stringKeySBW X Tile"),
             height: subBoardWidget._boardHeightPixels,
             width: subBoardWidget._boardWidthPixels);
         break;

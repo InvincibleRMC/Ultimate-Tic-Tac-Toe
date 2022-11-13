@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:ultimate_tic_tac_toe/pages/game_conclusion.dart';
 import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
-import 'package:ultimate_tic_tac_toe/tiles/sub_board_widget.dart';
+import 'package:ultimate_tic_tac_toe/tiles/widget/sub_board_widget.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
-import '../pages/game_conclusion.dart';
-
-class BoardWidget extends StatefulWidget {
+class MainBoardWidget extends StatefulWidget {
   final MainBoard _board;
   final double _boardWidthPixels;
   final double _boardHeightPixels;
 
   //TODO make a square not rectangle?
-  const BoardWidget({
+  const MainBoardWidget({
     Key? key,
     required MainBoard board,
     required double boardWidthPixels,
@@ -21,25 +20,17 @@ class BoardWidget extends StatefulWidget {
         _boardHeightPixels = boardHeightPixels,
         super(key: key);
 
-  double getBoardWidthPixels() {
-    return _boardWidthPixels;
-  }
-
-  double getBoardHeightPixels() {
-    return _boardHeightPixels;
-  }
-
   @override
-  State<StatefulWidget> createState() => BoardWidgetState();
+  State<StatefulWidget> createState() => MainBoardWidgetState();
 }
 
-class BoardWidgetState extends State<BoardWidget> {
+class MainBoardWidgetState extends State<MainBoardWidget> {
   @override
   Widget build(BuildContext context) {
     return gameBoard();
   }
 
-  void boardRefresh(BuildContext context, MainBoard b) {
+  void _boardRefresh(BuildContext context, MainBoard b) {
     setState(() {
       if (b.solved(b.getSubBoardWinners()) || b.emptyChild()) {
         TileState winner = b.winner(b.getSubBoardWinners());
@@ -70,7 +61,7 @@ class BoardWidgetState extends State<BoardWidget> {
               subBoard: widget._board.getSubBoard(i, j),
               boardWidthPixels: subBoardWidth,
               boardHeightPixels: subBoardHeight,
-              notifyBoard: boardRefresh,
+              notifyBoard: _boardRefresh,
             ),
           );
         }

@@ -23,6 +23,7 @@ class GameSettings extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
+              key: const Key("home_button"),
               onPressed: () {
                 Navigator.push(
                     context,
@@ -33,6 +34,7 @@ class GameSettings extends StatelessWidget {
               child: Text(_home),
             ),
             ElevatedButton(
+                key: const Key("game_button"),
                 onPressed: () {
                   Navigator.push(
                       context,
