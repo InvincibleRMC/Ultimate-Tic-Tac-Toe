@@ -10,7 +10,7 @@ class GamePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mainBoardWidth = MediaQuery.of(context).size.width;
-    final mainBoardHeight = MediaQuery.of(context).size.height;
+    final mainBoardHeight = MediaQuery.of(context).size.width;
     MainBoard board = MainBoard(3);
     return MaterialApp(
         home: Scaffold(

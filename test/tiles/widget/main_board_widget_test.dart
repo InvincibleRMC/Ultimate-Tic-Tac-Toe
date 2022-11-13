@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ultimate_tic_tac_toe/pages/game_conclusion.dart';
-import 'package:ultimate_tic_tac_toe/pages/home.dart';
-import 'package:ultimate_tic_tac_toe/pages/app_settings.dart';
 import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 import 'package:ultimate_tic_tac_toe/tiles/widget/main_board_widget.dart';

@@ -27,7 +27,7 @@ class MainBoardWidget extends StatefulWidget {
 class MainBoardWidgetState extends State<MainBoardWidget> {
   @override
   Widget build(BuildContext context) {
-    return gameBoard();
+    return Center(child: gameBoard());
   }
 
   void _boardRefresh(BuildContext context, MainBoard b) {
@@ -46,17 +46,15 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
 
   Widget gameBoard() {
     return Builder(builder: (context) {
-      const int boardCount = 3;
+      final int boardCount = widget._board.size();
+      final double subBoardHeight = widget._boardHeightPixels / boardCount;
+      final double subBoardWidth = widget._boardWidthPixels / boardCount;
 
-      final subBoardHeight = widget._boardHeightPixels / boardCount;
-      final subBoardWidth = widget._boardWidthPixels / boardCount;
-
-      final children = <Widget>[];
+      final List<Widget> children = <Widget>[];
 
       for (int i = 0; i < boardCount; i++) {
-        final childrenRow = <Widget>[];
         for (int j = 0; j < boardCount; j++) {
-          childrenRow.add(
+          children.add(
             SubBoardWidget(
               subBoard: widget._board.getSubBoard(i, j),
               boardWidthPixels: subBoardWidth,
@@ -65,14 +63,15 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
             ),
           );
         }
-        children.add(Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: childrenRow));
-        // children.add(const SizedBox(width: 0, height: 0));
       }
 
-      return Column(
-          mainAxisAlignment: MainAxisAlignment.center, children: children);
+      return GridView(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+        ),
+        shrinkWrap: true,
+        children: children,
+      );
     });
   }
 }

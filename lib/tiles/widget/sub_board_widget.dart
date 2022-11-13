@@ -29,7 +29,7 @@ class SubBoardWidget extends StatefulWidget {
 class SubBoardWidgetState extends State<SubBoardWidget> {
   @override
   Widget build(BuildContext context) {
-    return subBoardTiles();
+    return Center(child: subBoardTiles());
   }
 
   void _subBoardRefresh(BuildContext context, SubBoard s) {
@@ -41,15 +41,14 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
   Widget subBoardTiles() {
     return Builder(builder: (context) {
       final int boardCount = widget._subBoard.getBoard().size();
-      final boardDim = MediaQuery.of(context).size.width / boardCount;
+      final boardDim = widget._boardWidthPixels;
       final tileDim = boardDim / boardCount;
 
       final children = <Widget>[];
 
       for (int i = 0; i < boardCount; i++) {
-        final childrenRow = <Widget>[];
         for (int j = 0; j < boardCount; j++) {
-          childrenRow.add(
+          children.add(
             TileWidget(
               tileDim: tileDim,
               tile: widget._subBoard.getTile(i, j),
@@ -57,23 +56,24 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
             ),
           );
         }
-        children.add(Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: childrenRow));
       }
 
-      // final stack = Stack();
-      Widget w = symbolForTile(widget._subBoard.getWinner(), widget);
+      GridView gv = GridView(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+        ),
+        shrinkWrap: true,
+        children: children,
+      );
 
-      Column col = Column(
-          mainAxisAlignment: MainAxisAlignment.center, children: children);
+      Widget w = symbolForTile(widget._subBoard.getWinner(), widget);
 
       Image img = Image.asset('images/board.png',
           height: widget._boardHeightPixels, width: widget._boardWidthPixels);
 
       return Stack(
         alignment: Alignment.center,
-        children: [w, img, col],
+        children: [w, img, gv],
       );
     });
   }
