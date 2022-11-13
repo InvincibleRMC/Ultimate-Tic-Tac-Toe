@@ -73,7 +73,7 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
 
       return Stack(
         alignment: Alignment.center,
-        children: [w, img, gv],
+        children: [w, img, highlighting(widget), gv],
       );
     });
   }
@@ -103,5 +103,25 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
         break;
     }
     return widget;
+  }
+
+  Opacity highlighting(SubBoardWidget sbw) {
+    SubBoard? sb = sbw._subBoard.getBoard().getCurrentSubboard();
+
+    double opacityVal;
+    if (sb == sbw._subBoard) {
+      opacityVal = 0.5;
+    } else {
+      opacityVal = 0;
+    }
+
+    return Opacity(
+        opacity: opacityVal,
+        child: SizedBox.square(
+            dimension: sbw._boardWidthPixels,
+            child: const DecoratedBox(
+                decoration: BoxDecoration(
+              color: Color.fromARGB(255, 119, 183, 236),
+            ))));
   }
 }
