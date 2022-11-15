@@ -1,4 +1,5 @@
 # ultimate_tic_tac_toe
+<a href="https://github.com/InvincibleRMC/Ultimate-Tic-Tac-Toe/actions"><img src="https://github.com/InvincibleRMC/Ultimate-Tic-Tac-Toe/workflows/test-my-app/badge.svg" alt="Build Status"></a>
 
 A Flutter project for CSDS 393
 
