@@ -1,7 +1,7 @@
 # ultimate_tic_tac_toe
 
 A Flutter project for CSDS 393
-<a href="https://github.com/[USER_NAME]/[REPO_NAME]/actions"><img src="https://github.com/[USER_NAME]/[REPO_NAME]/workflows/test-my-app/badge.svg" alt="Build Status"></a>
+<a href="https://github.com/InvincibleRMC/Ultimate-Tic-Tac-Toe/actions"><img src="https://github.com/InvincibleRMC/Ultimate-Tic-Tac-Toe/workflows/test-my-app/badge.svg" alt="Build Status"></a>
 ## Getting Started
 
 How to [play](https://en.wikipedia.org/wiki/Ultimate_tic-tac-toe)
