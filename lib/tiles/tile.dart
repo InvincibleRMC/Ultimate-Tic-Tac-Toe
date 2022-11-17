@@ -33,7 +33,6 @@ class Tile {
     if (tileSet()) {
       return;
     }
-    print(b.getCurrentSubboard());
     // If the subboard is not the current subboard do not place unless it is null
     if (_subBoard == b.getCurrentSubboard() || b.getCurrentSubboard() == null) {
     } else {
@@ -42,7 +41,6 @@ class Tile {
 
     // Set the winner and update the turn
     _state = b.getTurn();
-
     b.nextTurn();
 
     // Find the next subboard from current tile
@@ -51,16 +49,13 @@ class Tile {
 
     //If s is Tied remove current subboard
     if (s.isTied(_subBoard.getTileStates())) {
-      print("idiot thinks there is a tie");
       b.setCurrentSubboard(null);
     } else {
       b.setCurrentSubboard(s);
     }
-    print("died here");
 
     if (_subBoard.solved(_subBoard.getTileStates())) {
       _subBoard.setWinner(_subBoard.winner(_subBoard.getTileStates()));
-      // b.placedAChild();
     }
   }
 

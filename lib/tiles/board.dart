@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:ultimate_tic_tac_toe/tiles/solved.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
