@@ -47,8 +47,9 @@ class Tile {
     List<int> loc = _subBoard.getPointFromTile(this);
     SubBoard s = b.getSubBoard(loc[0], loc[1]);
 
-    //If s is Tied remove current subboard
-    if (s.isTied(_subBoard.getTileStates())) {
+    //If s is tied or solved remove current subboard
+    if (s.isTied(_subBoard.getTileStates()) ||
+        s.solved(_subBoard.getTileStates())) {
       b.setCurrentSubboard(null);
     } else {
       b.setCurrentSubboard(s);

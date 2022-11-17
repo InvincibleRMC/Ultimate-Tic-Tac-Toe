@@ -58,15 +58,7 @@ class MainBoard extends Board {
   }
 
   void setCurrentSubboard(SubBoard? sb) {
-    if (sb == null) {
-      _currentSB = null;
-      return;
-    }
-    if (sb.solved(sb.getTileStates())) {
-      _currentSB = null;
-    } else {
-      _currentSB = sb;
-    }
+    _currentSB = sb;
   }
 
   bool isTied(List<List<TileState>> tiles) {
