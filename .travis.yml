@@ -1,4 +1,0 @@
-languague: dart
-dart_task:
-- test
-- dartfmt
