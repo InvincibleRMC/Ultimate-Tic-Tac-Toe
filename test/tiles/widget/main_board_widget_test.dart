@@ -42,7 +42,7 @@ void main() {
       expect(find.byType(GameConclusion), findsOneWidget);
     });
 
-    testWidgets('Main Board Widget Winner', (WidgetTester tester) async {
+    testWidgets('Main Board Widget Tie', (WidgetTester tester) async {
       MainBoard b = MainBoard();
 
       MaterialApp materialWidget = MaterialApp(
@@ -58,7 +58,17 @@ void main() {
 
       expect(find.byType(MainBoardWidget), findsOneWidget);
 
-      b.setChildEmpty();
+      b.getSubBoard(0, 0).setWinner(TileState.X);
+      b.getSubBoard(0, 1).setWinner(TileState.X);
+      b.getSubBoard(0, 2).setWinner(TileState.O);
+
+      b.getSubBoard(1, 0).setWinner(TileState.O);
+      b.getSubBoard(1, 1).setWinner(TileState.X);
+      b.getSubBoard(1, 2).setWinner(TileState.X);
+
+      b.getSubBoard(2, 0).setWinner(TileState.X);
+      b.getSubBoard(2, 1).setWinner(TileState.O);
+      b.getSubBoard(2, 2).setWinner(TileState.O);
       await tester.tap(find.byWidget(materialWidget));
       await tester.pumpAndSettle();
 
