@@ -21,37 +21,42 @@ class Tile {
   //placeTile and toggle the Board Turn
   void placeTile() {
     MainBoard b = _subBoard.getBoard();
-    if (b.solved(b.getSubBoardWinners())) {
+
+    // If board or subboard is solved don't place
+    if (b.solved(b.getSubBoardStates())) {
       return;
     }
-    if (_subBoard.solved(_subBoard.getTileWinners())) {
+    if (_subBoard.solved(_subBoard.getTileStates())) {
       return;
     }
+    // If the tile is set do not place
     if (tileSet()) {
       return;
     }
-
-    if (_subBoard != b.getCurrentSubboard() && b.getCurrentSubboard() != null) {
+    // If the subboard is not the current subboard do not place unless it is null
+    if (_subBoard == b.getCurrentSubboard() || b.getCurrentSubboard() == null) {
+    } else {
       return;
     }
 
-    List<int> loc = _subBoard.getPointFromTile(this);
-
+    // Set the winner and update the turn
     _state = b.getTurn();
     b.nextTurn();
-    _subBoard.placedAChild();
 
+    // Find the next subboard from current tile
+    List<int> loc = _subBoard.getPointFromTile(this);
     SubBoard s = b.getSubBoard(loc[0], loc[1]);
-    if (!s.emptyChild()) {
-      b.setCurrentSubboard(s);
-    } else {
+
+    //If s is tied or solved remove current subboard
+    if (s.isTied(_subBoard.getTileStates()) ||
+        s.solved(_subBoard.getTileStates())) {
       b.setCurrentSubboard(null);
+    } else {
+      b.setCurrentSubboard(s);
     }
 
-    if (_subBoard.solved(_subBoard.getTileWinners())) {
-      _subBoard.setChildEmpty();
-      _subBoard.setWinner(_subBoard.winner(_subBoard.getTileWinners()));
-      b.placedAChild();
+    if (_subBoard.solved(_subBoard.getTileStates())) {
+      _subBoard.setWinner(_subBoard.winner(_subBoard.getTileStates()));
     }
   }
 

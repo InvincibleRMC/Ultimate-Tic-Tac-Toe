@@ -45,4 +45,22 @@ void main() {
     expect(s00.getBoard(), b);
     expect(s00.getBoard(), s01.getBoard());
   });
+
+  test("SubBoard tie test", () {
+    MainBoard b = MainBoard();
+    SubBoard s = b.getSubBoard(0, 0);
+    expect(s.isTied(s.getTileStates()), false);
+    s.getTile(0, 0).setTile(TileState.X);
+    s.getTile(0, 1).setTile(TileState.X);
+    s.getTile(0, 2).setTile(TileState.O);
+
+    s.getTile(1, 0).setTile(TileState.O);
+    s.getTile(1, 1).setTile(TileState.X);
+    s.getTile(1, 2).setTile(TileState.X);
+
+    s.getTile(2, 0).setTile(TileState.X);
+    s.getTile(2, 1).setTile(TileState.O);
+    s.getTile(2, 2).setTile(TileState.O);
+    expect(s.isTied(s.getTileStates()), true);
+  });
 }

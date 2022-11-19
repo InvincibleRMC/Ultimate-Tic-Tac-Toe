@@ -52,17 +52,32 @@ class SubBoard extends Board {
     return [locI, locJ];
   }
 
-  List<List<TileState>> getTileWinners() {
+  List<List<TileState>> getTileStates() {
     int size = _board.size();
-    List<List<TileState>> winners = List<List<TileState>>.generate(
+    List<List<TileState>> tileStates = List<List<TileState>>.generate(
         size,
         (int index) =>
             List<TileState>.generate(size, (int index) => TileState.none));
     for (int i = 0; i < _tiles.length; i++) {
       for (int j = 0; j < _tiles[0].length; j++) {
-        winners[i][j] = getTile(i, j).getTile();
+        tileStates[i][j] = getTile(i, j).getTile();
       }
     }
-    return winners;
+    return tileStates;
+  }
+
+  bool isTied(List<List<TileState>> tiles) {
+    return !solved(tiles) && allDataSet(tiles);
+  }
+
+  bool allDataSet(List<List<TileState>> data) {
+    for (int i = 0; i < size(); i++) {
+      for (int j = 0; j < size(); j++) {
+        if (data[i][j] == TileState.none) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }

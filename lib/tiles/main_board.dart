@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 import 'board.dart';
@@ -6,6 +7,18 @@ class MainBoard extends Board {
   late List<List<SubBoard>> _subBoards;
   SubBoard? _currentSB;
   late bool _isSinglePlayer;
+
+  bool _tied = false;
+
+  @visibleForTesting
+  void setTied() {
+    _tied = true;
+  }
+
+  @visibleForTesting
+  bool isTiedTesting() {
+    return _tied;
+  }
 
   TileState _turn = TileState.X;
 
@@ -50,7 +63,7 @@ class MainBoard extends Board {
 
     for (int i = 0; i < _subBoards.length; i++) {
       for (int j = 0; j < _subBoards[0].length; j++) {
-        if (_subBoards[i][j].solved(_subBoards[i][j].getTileWinners()) ==
+        if (_subBoards[i][j].solved(_subBoards[i][j].getTileStates()) ==
             false) {
           emptySpaces.add(_subBoards[i][j]);
         }
@@ -61,18 +74,18 @@ class MainBoard extends Board {
     return emptySpaces;
   }
 
-  List<List<TileState>> getSubBoardWinners() {
-    List<List<TileState>> winners = List<List<TileState>>.generate(
+  List<List<TileState>> getSubBoardStates() {
+    List<List<TileState>> states = List<List<TileState>>.generate(
         size(),
         (int index) =>
             List<TileState>.generate(size(), (int index) => TileState.none));
     for (int i = 0; i < _subBoards.length; i++) {
       for (int j = 0; j < _subBoards[0].length; j++) {
-        winners[i][j] = getSubBoard(i, j).getWinner();
+        states[i][j] = getSubBoard(i, j).getWinner();
       }
     }
 
-    return winners;
+    return states;
   }
 
   SubBoard? getCurrentSubboard() {
@@ -88,10 +101,26 @@ class MainBoard extends Board {
       _currentSB = null;
       return;
     }
-    if (sb.solved(sb.getTileWinners())) {
+    if (sb.solved(sb.getTileStates())) {
       _currentSB = null;
     } else {
       _currentSB = sb;
+    }
+
+    bool isTied(List<List<TileState>> tiles) {
+      return !solved(tiles) && allDataSet(tiles);
+    }
+
+    bool allDataSet(List<List<TileState>> data) {
+      for (int i = 0; i < size(); i++) {
+        for (int j = 0; j < size(); j++) {
+          if (data[i][j] == TileState.none ||
+              !_subBoards[i][j].allDataSet(data)) {
+            return false;
+          }
+        }
+      }
+      return true;
     }
   }
 }
