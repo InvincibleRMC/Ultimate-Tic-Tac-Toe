@@ -32,7 +32,7 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
 
   void _boardRefresh(BuildContext context, MainBoard b) {
     setState(() {
-      if (b.solved(b.getSubBoardStates()) || b.emptyChild()) {
+      if (b.solved(b.getSubBoardStates()) || b.isTied(b.getSubBoardStates())) {
         TileState winner = b.winner(b.getSubBoardStates());
 
         Navigator.push(

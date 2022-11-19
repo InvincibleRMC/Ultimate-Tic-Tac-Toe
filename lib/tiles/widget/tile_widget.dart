@@ -38,7 +38,6 @@ class TileWidgetState extends State<TileWidget> {
     );
   }
 
-  bool activeAi = true;
   _updateTile(BuildContext context, TileWidget widget) {
     setState(() {
       MainBoard? mb = widget._tile.getSubBoard().getBoard();
@@ -55,7 +54,7 @@ class TileWidgetState extends State<TileWidget> {
     if (mb.getTurn() == TileState.X) {
       widget._tile.placeTile();
 
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(const Duration(seconds: 1), () {
         SubBoard? sb =
             widget._tile.getSubBoard().getBoard().getCurrentSubboard();
 

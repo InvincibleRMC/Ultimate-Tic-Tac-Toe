@@ -32,7 +32,7 @@ void main() {
       expect(find.byType(GamePage), findsNothing);
     });
 
-    testWidgets('GameSettings to Game', (WidgetTester tester) async {
+    testWidgets('GameSettings to 1 Player', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
         home: const GameSettings(),
 
@@ -41,11 +41,30 @@ void main() {
         navigatorObservers: [mockObserver],
       ));
 
-      await tester.tap(find.byKey(const Key("game_button")));
+      await tester.tap(find.byKey(const Key("single_player_button")));
       await tester.pumpAndSettle();
 
       // ...and there should be a DetailsPage present in the widget tree...
       expect(find.byType(GamePage), findsOneWidget);
+      expect(find.byKey(const Key("single_player")), findsOneWidget);
+      expect(find.byType(HomePage), findsNothing);
+    });
+
+    testWidgets('GameSettings to 2 Player', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(
+        home: const GameSettings(),
+
+        // This mocked observer will now receive all navigation events
+        // that happen in our app.
+        navigatorObservers: [mockObserver],
+      ));
+
+      await tester.tap(find.byKey(const Key("two_player_button")));
+      await tester.pumpAndSettle();
+
+      // ...and there should be a DetailsPage present in the widget tree...
+      expect(find.byType(GamePage), findsOneWidget);
+      expect(find.byKey(const Key("two_player")), findsOneWidget);
       expect(find.byType(HomePage), findsNothing);
     });
   });

@@ -6,7 +6,7 @@ import 'board.dart';
 class MainBoard extends Board {
   late List<List<SubBoard>> _subBoards;
   SubBoard? _currentSB;
-  late bool _isSinglePlayer;
+  final bool _isSinglePlayer;
 
   bool _tied = false;
 
@@ -22,8 +22,9 @@ class MainBoard extends Board {
 
   TileState _turn = TileState.X;
 
-  MainBoard(bool isSinglePlayer, [int size = 3]) : super(size) {
-    _isSinglePlayer = isSinglePlayer;
+  MainBoard([bool isSinglePlayer = false, int size = 3])
+      : _isSinglePlayer = isSinglePlayer,
+        super(size) {
     _subBoards = List<List<SubBoard>>.generate(
         size,
         (int index) =>
@@ -97,30 +98,22 @@ class MainBoard extends Board {
   }
 
   void setCurrentSubboard(SubBoard? sb) {
-    if (sb == null) {
-      _currentSB = null;
-      return;
-    }
-    if (sb.solved(sb.getTileStates())) {
-      _currentSB = null;
-    } else {
-      _currentSB = sb;
-    }
+    _currentSB = sb;
+  }
 
-    bool isTied(List<List<TileState>> tiles) {
-      return !solved(tiles) && allDataSet(tiles);
-    }
+  bool isTied(List<List<TileState>> tiles) {
+    return !solved(tiles) && allDataSet(tiles);
+  }
 
-    bool allDataSet(List<List<TileState>> data) {
-      for (int i = 0; i < size(); i++) {
-        for (int j = 0; j < size(); j++) {
-          if (data[i][j] == TileState.none ||
-              !_subBoards[i][j].allDataSet(data)) {
-            return false;
-          }
+  bool allDataSet(List<List<TileState>> data) {
+    for (int i = 0; i < size(); i++) {
+      for (int j = 0; j < size(); j++) {
+        if (data[i][j] == TileState.none ||
+            !_subBoards[i][j].allDataSet(data)) {
+          return false;
         }
       }
-      return true;
     }
+    return true;
   }
 }
