@@ -38,16 +38,16 @@ class GameConclusion extends StatelessWidget {
               },
               child: Text(_home),
             ),
-            ElevatedButton(
-                key: const Key("game_button"),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const GamePage(),
-                      ));
-                },
-                child: Text(_game))
+            // ElevatedButton(
+            //     key: const Key("game_button"),
+            //     onPressed: () {
+            //       Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //             builder: (context) => const GamePage(),
+            //           ));
+            //     },
+            //     child: Text(_game))
           ],
         ),
       ),

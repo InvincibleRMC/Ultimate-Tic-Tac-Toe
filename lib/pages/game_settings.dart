@@ -7,7 +7,8 @@ class GameSettings extends StatelessWidget {
   const GameSettings({super.key});
   final String _title = "Game Settings";
   final String _home = "Return Home";
-  final String _game = "Start Game";
+  final String _twoPlayer = "Two Player";
+  final String _onePlayer = "Single Player";
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,28 @@ class GameSettings extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
+                key: const Key("single_player"),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const GamePage(isSinglePlayer: true),
+                      ));
+                },
+                child: Text(_onePlayer)),
+            ElevatedButton(
+                key: const Key("two_player"),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const GamePage(isSinglePlayer: false),
+                      ));
+                },
+                child: Text(_twoPlayer)),
+            ElevatedButton(
               key: const Key("home_button"),
               onPressed: () {
                 Navigator.push(
@@ -33,16 +56,6 @@ class GameSettings extends StatelessWidget {
               },
               child: Text(_home),
             ),
-            ElevatedButton(
-                key: const Key("game_button"),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const GamePage(),
-                      ));
-                },
-                child: Text(_game))
           ],
         ),
       ),

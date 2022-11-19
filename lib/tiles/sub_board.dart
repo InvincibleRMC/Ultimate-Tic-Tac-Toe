@@ -22,6 +22,20 @@ class SubBoard extends Board {
     return _tiles[i][j];
   }
 
+  List<dynamic> getAvailableTiles() {
+    var emptySpaces = [];
+
+    for (int i = 0; i < _tiles.length; i++) {
+      for (int j = 0; j < _tiles[0].length; j++) {
+        if (_tiles[i][j].getTile() == TileState.none) {
+          emptySpaces.add([i, j]);
+        }
+      }
+    }
+
+    return emptySpaces;
+  }
+
   List<int> getPointFromTile(Tile t) {
     int locI = -1, locJ = -1;
     for (int i = 0; i < _tiles.length; i++) {

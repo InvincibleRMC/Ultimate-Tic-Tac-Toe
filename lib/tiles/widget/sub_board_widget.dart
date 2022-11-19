@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 import 'package:ultimate_tic_tac_toe/tiles/widget/tile_widget.dart';
+import 'dart:math';
+
+import '../main_board.dart';
 
 class SubBoardWidget extends StatefulWidget {
   final SubBoard _subBoard;
@@ -115,13 +118,27 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
       opacityVal = 0;
     }
 
-    return Opacity(
-        opacity: opacityVal,
-        child: SizedBox.square(
-            dimension: sbw._boardWidthPixels,
-            child: const DecoratedBox(
-                decoration: BoxDecoration(
-              color: Color.fromARGB(255, 119, 183, 236),
-            ))));
+    //ik its jank asf
+    MainBoard mb = widget._subBoard.getBoard();
+
+    if (mb.getTurn() == TileState.X) {
+      return Opacity(
+          opacity: opacityVal,
+          child: SizedBox.square(
+              dimension: sbw._boardWidthPixels,
+              child: const DecoratedBox(
+                  decoration: BoxDecoration(
+                color: Color.fromARGB(255, 119, 183, 236),
+              ))));
+    } else {
+      return Opacity(
+          opacity: opacityVal,
+          child: SizedBox.square(
+              dimension: sbw._boardWidthPixels,
+              child: const DecoratedBox(
+                  decoration: BoxDecoration(
+                color: Color.fromARGB(255, 236, 119, 119),
+              ))));
+    }
   }
 }

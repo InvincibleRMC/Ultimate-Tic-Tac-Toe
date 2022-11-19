@@ -5,10 +5,12 @@ import 'board.dart';
 class MainBoard extends Board {
   late List<List<SubBoard>> _subBoards;
   SubBoard? _currentSB;
+  late bool _isSinglePlayer;
 
   TileState _turn = TileState.X;
 
-  MainBoard([int size = 3]) : super(size) {
+  MainBoard(bool isSinglePlayer, [int size = 3]) : super(size) {
+    _isSinglePlayer = isSinglePlayer;
     _subBoards = List<List<SubBoard>>.generate(
         size,
         (int index) =>
@@ -27,6 +29,38 @@ class MainBoard extends Board {
     _turn = (_turn == TileState.X) ? TileState.O : TileState.X;
   }
 
+  List<int> getPointFromSubBoard(SubBoard sb) {
+    int locI = -1, locJ = -1;
+    for (int i = 0; i < _subBoards.length; i++) {
+      for (int j = 0; j < _subBoards.length; j++) {
+        if (_subBoards[i][j] == sb) {
+          locI = i;
+          locJ = j;
+        }
+      }
+    }
+    if (locI == -1 || locJ == -1) {
+      throw Error();
+    }
+    return [locI, locJ];
+  }
+
+  List<dynamic> getAvailableSubBoards() {
+    var emptySpaces = [];
+
+    for (int i = 0; i < _subBoards.length; i++) {
+      for (int j = 0; j < _subBoards[0].length; j++) {
+        if (_subBoards[i][j].solved(_subBoards[i][j].getTileWinners()) ==
+            false) {
+          emptySpaces.add(_subBoards[i][j]);
+        }
+      }
+    }
+
+    //var flat = emptySpaces.expand((i) => i).toList();
+    return emptySpaces;
+  }
+
   List<List<TileState>> getSubBoardWinners() {
     List<List<TileState>> winners = List<List<TileState>>.generate(
         size(),
@@ -43,6 +77,10 @@ class MainBoard extends Board {
 
   SubBoard? getCurrentSubboard() {
     return _currentSB;
+  }
+
+  bool isSinglePlayer() {
+    return _isSinglePlayer;
   }
 
   void setCurrentSubboard(SubBoard? sb) {

@@ -1,6 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
+
+import '../main_board.dart';
+import '../sub_board.dart';
 
 class TileWidget extends StatefulWidget {
   final double _tileDim;
@@ -33,11 +38,47 @@ class TileWidgetState extends State<TileWidget> {
     );
   }
 
-  void _updateTile(BuildContext context, TileWidget widget) {
+  bool activeAi = true;
+  _updateTile(BuildContext context, TileWidget widget) {
     setState(() {
-      widget._tile.placeTile();
+      MainBoard? mb = widget._tile.getSubBoard().getBoard();
+      if (mb.isSinglePlayer()) {
+        enemyMove(mb);
+      } else {
+        widget._tile.placeTile();
+      }
       widget._notifySubBoard(context, widget._tile.getSubBoard());
     });
+  }
+
+  void enemyMove(MainBoard mb) {
+    if (mb.getTurn() == TileState.X) {
+      widget._tile.placeTile();
+
+      Future.delayed(Duration(seconds: 1), () {
+        SubBoard? sb =
+            widget._tile.getSubBoard().getBoard().getCurrentSubboard();
+
+        if (sb == null) {
+          List<int> enemySbCoords = mb.getPointFromSubBoard(
+              mb.getAvailableSubBoards()[
+                  Random().nextInt(mb.getAvailableSubBoards().length)]);
+
+          SubBoard enemySb = mb.getSubBoard(enemySbCoords[0], enemySbCoords[1]);
+
+          List<int> enemyMove = enemySb.getAvailableTiles()[
+              Random().nextInt(enemySb.getAvailableTiles().length)];
+
+          enemySb.getTile(enemyMove[0], enemyMove[1]).placeTile();
+        } else {
+          List<int> enemyMove = sb.getAvailableTiles()[
+              Random().nextInt(sb.getAvailableTiles().length)];
+          sb.getTile(enemyMove[0], enemyMove[1]).placeTile();
+        }
+
+        widget._notifySubBoard(context, widget._tile.getSubBoard());
+      });
+    }
   }
 
   Widget symbolForTile(TileWidget tileWidget) {
