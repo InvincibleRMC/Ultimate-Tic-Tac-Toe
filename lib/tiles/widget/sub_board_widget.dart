@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 import 'package:ultimate_tic_tac_toe/tiles/widget/tile_widget.dart';
-import 'dart:math';
-
 import '../main_board.dart';
 
 class SubBoardWidget extends StatefulWidget {

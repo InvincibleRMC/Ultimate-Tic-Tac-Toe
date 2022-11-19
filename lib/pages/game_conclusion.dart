@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/pages/home.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
-import 'game.dart';
 
 class GameConclusion extends StatelessWidget {
   const GameConclusion({
@@ -12,7 +11,7 @@ class GameConclusion extends StatelessWidget {
 
   final TileState _winner;
   final String _home = "Return to Home";
-  final String _game = "Another game";
+  //final String _game = "Another game";
 
   @override
   Widget build(BuildContext context) {

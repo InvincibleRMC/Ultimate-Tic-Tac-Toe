@@ -24,24 +24,24 @@ class GameSettings extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-                key: const Key("single_player"),
+                key: const Key("single_player_button"),
                 onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            const GamePage(isSinglePlayer: true),
+                        builder: (context) => const GamePage(
+                            isSinglePlayer: true, key: Key("single_player")),
                       ));
                 },
                 child: Text(_onePlayer)),
             ElevatedButton(
-                key: const Key("two_player"),
+                key: const Key("two_player_button"),
                 onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            const GamePage(isSinglePlayer: false),
+                        builder: (context) => const GamePage(
+                            isSinglePlayer: false, key: Key("two_player")),
                       ));
                 },
                 child: Text(_twoPlayer)),
