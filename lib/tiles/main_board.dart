@@ -71,7 +71,6 @@ class MainBoard extends Board {
       }
     }
 
-    //var flat = emptySpaces.expand((i) => i).toList();
     return emptySpaces;
   }
 
@@ -85,7 +84,6 @@ class MainBoard extends Board {
         states[i][j] = getSubBoard(i, j).getWinner();
       }
     }
-
     return states;
   }
 

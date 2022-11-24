@@ -2,6 +2,7 @@ import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 abstract class Solved {
   bool solved(List<List<TileState>> tiles) {
+    print(tiles);
     return winner(tiles) != TileState.none;
   }
 
