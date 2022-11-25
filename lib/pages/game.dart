@@ -13,7 +13,7 @@ class GamePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final mainBoardWidth = MediaQuery.of(context).size.width;
     final mainBoardHeight = MediaQuery.of(context).size.width;
-    MainBoard board = MainBoard(isSinglePlayer, 3);
+    MainBoard board = MainBoard(isSinglePlayer, 3, false);
 
     return MaterialApp(
         home: Scaffold(

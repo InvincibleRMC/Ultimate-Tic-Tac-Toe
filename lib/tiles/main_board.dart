@@ -7,6 +7,7 @@ class MainBoard extends Board {
   late List<List<SubBoard>> _subBoards;
   SubBoard? _currentSB;
   final bool _isSinglePlayer;
+  final bool _isMenu;
 
   bool _tied = false;
 
@@ -22,13 +23,18 @@ class MainBoard extends Board {
 
   TileState _turn = TileState.X;
 
-  MainBoard([bool isSinglePlayer = false, int size = 3])
+  MainBoard([bool isSinglePlayer = false, int size = 3, bool isMenu = true])
       : _isSinglePlayer = isSinglePlayer,
+        _isMenu = isMenu,
         super(size) {
     _subBoards = List<List<SubBoard>>.generate(
         size,
         (int index) =>
             List<SubBoard>.generate(size, (int index) => SubBoard(this)));
+  }
+
+  bool getIsMenu() {
+    return _isMenu;
   }
 
   SubBoard getSubBoard(int i, int j) {

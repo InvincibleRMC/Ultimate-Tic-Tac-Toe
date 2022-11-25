@@ -41,8 +41,9 @@ class TileWidgetState extends State<TileWidget> {
   _updateTile(BuildContext context, TileWidget widget) {
     setState(() {
       MainBoard? mb = widget._tile.getSubBoard().getBoard();
-      if (mb.isSinglePlayer()) {
+      if (mb.isSinglePlayer() && !mb.getIsMenu()) {
         enemyMove(mb);
+      } else if (mb.getIsMenu()) {
       } else {
         widget._tile.placeTile();
       }
