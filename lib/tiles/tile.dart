@@ -48,13 +48,13 @@ class Tile {
     SubBoard s = b.getSubBoard(loc[0], loc[1]);
 
     //If s is tied or solved remove current subboard
-    if (s.isTied(_subBoard.getTileStates()) ||
-        s.solved(_subBoard.getTileStates())) {
+    if (s.isTied(s.getTileStates()) || s.solved(s.getTileStates())) {
       b.setCurrentSubboard(null);
     } else {
       b.setCurrentSubboard(s);
     }
 
+    //should prob b s instead of _subboard but not sure
     if (_subBoard.solved(_subBoard.getTileStates())) {
       _subBoard.setWinner(_subBoard.winner(_subBoard.getTileStates()));
     }

@@ -18,7 +18,7 @@ void main() {
 
     testWidgets('Home to AppSettings', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
-        home: const HomePage(),
+        home: HomePage(),
 
         // This mocked observer will now receive all navigation events
         // that happen in our app.
@@ -35,7 +35,7 @@ void main() {
 
     testWidgets('Home to GameSettings', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
-        home: const HomePage(),
+        home: HomePage(),
 
         // This mocked observer will now receive all navigation events
         // that happen in our app.

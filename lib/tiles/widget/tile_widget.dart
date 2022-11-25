@@ -41,18 +41,11 @@ class TileWidgetState extends State<TileWidget> {
   _updateTile(BuildContext context, TileWidget widget) {
     setState(() {
       MainBoard mb = widget._tile.getSubBoard().getBoard();
-
-      if (!mb.isSinglePlayer()) {
-        widget._tile.placeTile();
-        widget._notifySubBoard(context, widget._tile.getSubBoard());
-        return;
-      }
-
-      // TODO ADD HUMAN TURN THINGY
-      if (TileState.X == mb.getTurn()) {
-        widget._tile.placeTile();
+      if (mb.isSinglePlayer() && !mb.getIsMenu()) {
+        enemyMove(mb);
+      } else if (mb.getIsMenu()) {
       } else {
-        mb.getAIMove().placeTile();
+        widget._tile.placeTile();
       }
       widget._notifySubBoard(context, widget._tile.getSubBoard());
     });

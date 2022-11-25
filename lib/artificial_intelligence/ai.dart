@@ -26,7 +26,6 @@ class AI {
   Tile getTile() {
     //TODO make a setting maybe
     sleep(const Duration(milliseconds: 1000));
-    print(fun);
     return fun();
   }
 

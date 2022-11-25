@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/pages/home.dart';
-
 import 'game.dart';
 
 class GameSettings extends StatefulWidget {
@@ -89,7 +88,7 @@ class GameSettingSate extends State<GameSettings> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const HomePage(),
+                      builder: (context) => HomePage(),
                     ));
               },
               child: const Text(_home),

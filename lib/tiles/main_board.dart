@@ -10,6 +10,8 @@ class MainBoard extends Board {
   SubBoard? _currentSB;
   final bool _isSinglePlayer;
   late AI _ai;
+  final bool _isMenu;
+
   bool _tied = false;
 
   @visibleForTesting
@@ -25,8 +27,12 @@ class MainBoard extends Board {
   TileState _turn = TileState.X;
 
   MainBoard(
-      [bool isSinglePlayer = false, String difficulty = "Easy", int size = 3])
+      [bool isSinglePlayer = false,
+      String difficulty = "Easy",
+      int size = 3,
+      bool isMenu = true])
       : _isSinglePlayer = isSinglePlayer,
+        _isMenu = isMenu,
         super(size) {
     _ai = AI(this, difficulty, TileState.O);
     _subBoards = List<List<SubBoard>>.generate(
@@ -37,6 +43,10 @@ class MainBoard extends Board {
 
   Tile getAIMove() {
     return _ai.getTile();
+  }
+
+  bool getIsMenu() {
+    return _isMenu;
   }
 
   SubBoard getSubBoard(int i, int j) {
@@ -79,7 +89,6 @@ class MainBoard extends Board {
       }
     }
 
-    //var flat = emptySpaces.expand((i) => i).toList();
     return emptySpaces;
   }
 
@@ -93,7 +102,6 @@ class MainBoard extends Board {
         states[i][j] = getSubBoard(i, j).getWinner();
       }
     }
-
     return states;
   }
 
