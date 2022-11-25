@@ -40,11 +40,19 @@ class TileWidgetState extends State<TileWidget> {
 
   _updateTile(BuildContext context, TileWidget widget) {
     setState(() {
-      MainBoard? mb = widget._tile.getSubBoard().getBoard();
-      if (mb.isSinglePlayer()) {
-        enemyMove(mb);
-      } else {
+      MainBoard mb = widget._tile.getSubBoard().getBoard();
+
+      if (!mb.isSinglePlayer()) {
         widget._tile.placeTile();
+        widget._notifySubBoard(context, widget._tile.getSubBoard());
+        return;
+      }
+
+      // TODO ADD HUMAN TURN THINGY
+      if (TileState.X == mb.getTurn()) {
+        widget._tile.placeTile();
+      } else {
+        mb.getAIMove().placeTile();
       }
       widget._notifySubBoard(context, widget._tile.getSubBoard());
     });
@@ -52,7 +60,7 @@ class TileWidgetState extends State<TileWidget> {
 
   void enemyMove(MainBoard mb) {
     if (mb.getTurn() == TileState.X) {
-      widget._tile.placeTile();
+      //widget._tile.placeTile();
 
       Future.delayed(const Duration(seconds: 1), () {
         SubBoard? sb =

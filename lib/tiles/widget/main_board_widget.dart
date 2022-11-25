@@ -8,7 +8,6 @@ class MainBoardWidget extends StatefulWidget {
   final MainBoard _board;
   final double _boardWidthPixels;
   final double _boardHeightPixels;
-
   //TODO make a square not rectangle?
   const MainBoardWidget({
     Key? key,

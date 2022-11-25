@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
+import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
+import '../artificial_intelligence/ai.dart';
 import 'board.dart';
 
 class MainBoard extends Board {
   late List<List<SubBoard>> _subBoards;
   SubBoard? _currentSB;
   final bool _isSinglePlayer;
-
+  late AI _ai;
   bool _tied = false;
 
   @visibleForTesting
@@ -22,13 +24,19 @@ class MainBoard extends Board {
 
   TileState _turn = TileState.X;
 
-  MainBoard([bool isSinglePlayer = false, int size = 3])
+  MainBoard(
+      [bool isSinglePlayer = false, String difficulty = "Easy", int size = 3])
       : _isSinglePlayer = isSinglePlayer,
         super(size) {
+    _ai = AI(this, difficulty, TileState.O);
     _subBoards = List<List<SubBoard>>.generate(
         size,
         (int index) =>
             List<SubBoard>.generate(size, (int index) => SubBoard(this)));
+  }
+
+  Tile getAIMove() {
+    return _ai.getTile();
   }
 
   SubBoard getSubBoard(int i, int j) {

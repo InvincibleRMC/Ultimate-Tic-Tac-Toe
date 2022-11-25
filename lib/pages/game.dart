@@ -3,8 +3,12 @@ import 'package:ultimate_tic_tac_toe/tiles/widget/main_board_widget.dart';
 import '../tiles/main_board.dart';
 
 class GamePage extends StatelessWidget {
-  final bool isSinglePlayer;
-  const GamePage({required this.isSinglePlayer, super.key});
+  final bool _isSinglePlayer;
+  final String _difficulty;
+
+  const GamePage({isSinglePlayer = false, difficulty, super.key})
+      : _isSinglePlayer = isSinglePlayer,
+        _difficulty = difficulty;
 
   final String title = "Home";
   //final String home = "Play GamePage";
@@ -13,7 +17,7 @@ class GamePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final mainBoardWidth = MediaQuery.of(context).size.width;
     final mainBoardHeight = MediaQuery.of(context).size.width;
-    MainBoard board = MainBoard(isSinglePlayer, 3);
+    MainBoard board = MainBoard(_isSinglePlayer, _difficulty, 3);
 
     return MaterialApp(
         home: Scaffold(
