@@ -7,16 +7,16 @@ import 'game_settings.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
   final String _title = "Home";
   final String _gameSettings = "Play Game";
   final String _settings = "Settings";
+  final MainBoard menuBoard = MainBoard(false, 3, true);
 
   @override
   Widget build(BuildContext context) {
     final mainBoardWidth = MediaQuery.of(context).size.width;
     final mainBoardHeight = MediaQuery.of(context).size.width;
-    MainBoard board = MainBoard(false, 3, true);
 
     return Scaffold(
       appBar: AppBar(
@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             MainBoardWidget(
-                board: board,
+                board: menuBoard,
                 boardWidthPixels: mainBoardWidth,
                 boardHeightPixels: mainBoardHeight),
             ElevatedButton(
@@ -39,8 +39,9 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          const GameSettings(key: Key("game_settings")),
+                      builder: (context) => GameSettings(
+                          menuBoard: menuBoard,
+                          key: const Key("game_settings")),
                     ));
               },
               child: Text(_gameSettings),

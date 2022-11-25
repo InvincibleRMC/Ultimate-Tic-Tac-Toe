@@ -37,12 +37,14 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
   @override
   void initState() {
     super.initState();
-    isFirstMove = true;
 
-    _everySecond = Timer.periodic(Duration(milliseconds: 2000), (Timer t) {
-      _menuMove(isFirstMove);
-    });
-    isFirstMove = false;
+    if (widget._board.getIsMenu()) {
+      isFirstMove = true;
+      _everySecond = Timer.periodic(Duration(milliseconds: 2000), (Timer t) {
+        _menuMove(isFirstMove);
+      });
+      isFirstMove = false;
+    }
   }
 
   @override

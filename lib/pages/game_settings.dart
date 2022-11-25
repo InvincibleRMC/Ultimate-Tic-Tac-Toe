@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/pages/home.dart';
+import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
 
+import '../tiles/widget/main_board_widget.dart';
 import 'game.dart';
 
 class GameSettings extends StatelessWidget {
-  const GameSettings({super.key});
+  final MainBoard menuBoard;
+  const GameSettings({super.key, required this.menuBoard});
   final String _title = "Game Settings";
   final String _home = "Return Home";
   final String _twoPlayer = "Two Player";
@@ -12,6 +15,9 @@ class GameSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mainBoardWidth = MediaQuery.of(context).size.width;
+    final mainBoardHeight = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -23,6 +29,10 @@ class GameSettings extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            MainBoardWidget(
+                board: menuBoard,
+                boardWidthPixels: mainBoardWidth,
+                boardHeightPixels: mainBoardHeight),
             ElevatedButton(
                 key: const Key("single_player_button"),
                 onPressed: () {
@@ -51,7 +61,7 @@ class GameSettings extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const HomePage(),
+                      builder: (context) => HomePage(),
                     ));
               },
               child: Text(_home),
