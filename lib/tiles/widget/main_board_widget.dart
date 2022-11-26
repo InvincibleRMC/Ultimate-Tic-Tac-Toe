@@ -1,29 +1,23 @@
 import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/pages/game_conclusion.dart';
 import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/widget/sub_board_widget.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
-import '../sub_board.dart';
 
 class MainBoardWidget extends StatefulWidget {
   final MainBoard _board;
   final double _boardWidthPixels;
   final double _boardHeightPixels;
-  Timer? _timer;
   //TODO make a square not rectangle?
-  MainBoardWidget({
+  const MainBoardWidget({
     Key? key,
     required MainBoard board,
     required double boardWidthPixels,
     required double boardHeightPixels,
-    Timer? timer,
   })  : _board = board,
         _boardWidthPixels = boardWidthPixels,
         _boardHeightPixels = boardHeightPixels,
-        _timer = timer,
         super(key: key);
 
   @override
@@ -38,12 +32,9 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
     super.initState();
 
     if (widget._board.getIsMenu()) {
-      isFirstMove = true;
-
       timer = Timer.periodic(const Duration(milliseconds: 2000), (Timer t) {
-        menuMove(isFirstMove);
+        menuMove();
       });
-      isFirstMove = false;
     }
   }
 
@@ -78,17 +69,8 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
     });
   }
 
-  void menuMove(bool isFirstMove) {
+  void menuMove() {
     setState(() {
-      SubBoard? sb;
-
-      if (isFirstMove) {
-        sb = widget._board.getAvailableSubBoards()[
-            Random().nextInt(widget._board.getAvailableSubBoards().length)];
-      } else {
-        sb = widget._board.getCurrentSubboard();
-      }
-
       widget._board.getAIMove().placeTile();
     });
   }

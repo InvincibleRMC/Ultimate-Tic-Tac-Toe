@@ -1,13 +1,10 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 import '../main_board.dart';
-import '../sub_board.dart';
 
 class TileWidget extends StatefulWidget {
   final double _tileDim;
@@ -39,10 +36,6 @@ class TileWidgetState extends State<TileWidget> {
         child: symbolForTile(widget),
       ),
     );
-  }
-
-  _refreshTile() {
-    setState(() {});
   }
 
   _updateTile(BuildContext context, TileWidget widget) {
