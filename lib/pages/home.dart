@@ -32,7 +32,8 @@ class HomePage extends StatelessWidget {
             MainBoardWidget(
                 board: menuBoard,
                 boardWidthPixels: mainBoardWidth,
-                boardHeightPixels: mainBoardHeight),
+                boardHeightPixels: mainBoardHeight,
+                highlighting: true),
             ElevatedButton(
               key: const Key("game_settings_button"),
               onPressed: () {

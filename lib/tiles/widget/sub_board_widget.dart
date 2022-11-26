@@ -9,7 +9,7 @@ class SubBoardWidget extends StatefulWidget {
   final double _boardWidthPixels;
   final double _boardHeightPixels;
   final Function _notifyBoard;
-
+  final bool _highlighting;
   //TODO make a square not rectangle?
   const SubBoardWidget({
     Key? key,
@@ -17,10 +17,12 @@ class SubBoardWidget extends StatefulWidget {
     required double boardWidthPixels,
     required double boardHeightPixels,
     required Function notifyBoard,
+    bool highlighting = true,
   })  : _subBoard = subBoard,
         _boardWidthPixels = boardWidthPixels,
         _boardHeightPixels = boardHeightPixels,
         _notifyBoard = notifyBoard,
+        _highlighting = highlighting,
         super(key: key);
 
   @override
@@ -110,7 +112,8 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
     SubBoard? sb = sbw._subBoard.getBoard().getCurrentSubboard();
 
     double opacityVal;
-    if (sb == sbw._subBoard) {
+    print(sbw._highlighting);
+    if (sb == sbw._subBoard && sbw._highlighting) {
       opacityVal = 0.5;
     } else {
       opacityVal = 0;

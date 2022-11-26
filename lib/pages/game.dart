@@ -5,10 +5,15 @@ import '../tiles/main_board.dart';
 class GamePage extends StatelessWidget {
   final bool _isSinglePlayer;
   final String _difficulty;
-
-  const GamePage({isSinglePlayer = false, difficulty, super.key})
+  final bool _highlighting;
+  const GamePage(
+      {bool isSinglePlayer = false,
+      String difficulty = "Easy",
+      bool highlighting = true,
+      super.key})
       : _isSinglePlayer = isSinglePlayer,
-        _difficulty = difficulty;
+        _difficulty = difficulty,
+        _highlighting = highlighting;
 
   final String title = "Home";
   //final String home = "Play GamePage";
@@ -26,6 +31,7 @@ class GamePage extends StatelessWidget {
         board: board,
         boardWidthPixels: mainBoardWidth,
         boardHeightPixels: mainBoardHeight,
+        highlighting: _highlighting,
       )),
     ));
   }

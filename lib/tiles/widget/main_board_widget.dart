@@ -9,15 +9,18 @@ class MainBoardWidget extends StatefulWidget {
   final MainBoard _board;
   final double _boardWidthPixels;
   final double _boardHeightPixels;
+  final bool _highlighting;
   //TODO make a square not rectangle?
   const MainBoardWidget({
     Key? key,
     required MainBoard board,
     required double boardWidthPixels,
     required double boardHeightPixels,
+    bool highlighting = true,
   })  : _board = board,
         _boardWidthPixels = boardWidthPixels,
         _boardHeightPixels = boardHeightPixels,
+        _highlighting = highlighting,
         super(key: key);
 
   @override
@@ -91,6 +94,7 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
               boardWidthPixels: subBoardWidth,
               boardHeightPixels: subBoardHeight,
               notifyBoard: _boardRefresh,
+              highlighting: widget._highlighting,
             ),
           );
         }

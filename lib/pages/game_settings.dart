@@ -65,6 +65,7 @@ class GameSettingSate extends State<GameSettings> {
                         builder: (context) => GamePage(
                             isSinglePlayer: true,
                             difficulty: _difDropDown,
+                            highlighting: _highlighting,
                             key: const Key("single_player")),
                       ));
                 },
@@ -78,6 +79,7 @@ class GameSettingSate extends State<GameSettings> {
                         builder: (context) => GamePage(
                             isSinglePlayer: false,
                             difficulty: _difDropDown,
+                            highlighting: _highlighting,
                             key: const Key("two_player")),
                       ));
                 },

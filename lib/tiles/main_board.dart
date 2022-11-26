@@ -24,21 +24,29 @@ class MainBoard extends Board {
     return _tied;
   }
 
-  TileState _turn = TileState.X;
+  final TileState _startingTurn;
+  TileState _turn;
 
   MainBoard(
       [bool isSinglePlayer = false,
       String difficulty = "Easy",
       int size = 3,
-      bool isMenu = true])
+      bool isMenu = true,
+      TileState startingTurn = TileState.X])
       : _isSinglePlayer = isSinglePlayer,
         _isMenu = isMenu,
+        _startingTurn = startingTurn,
+        _turn = startingTurn,
         super(size) {
     _ai = AI(this, difficulty, TileState.O);
     _subBoards = List<List<SubBoard>>.generate(
         size,
         (int index) =>
             List<SubBoard>.generate(size, (int index) => SubBoard(this)));
+  }
+
+  TileState getStartingTurn() {
+    return _startingTurn;
   }
 
   Tile getAIMove() {
