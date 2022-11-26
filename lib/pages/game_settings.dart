@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/pages/home.dart';
+import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 import 'game.dart';
 
 class GameSettings extends StatefulWidget {
@@ -16,6 +17,7 @@ class GameSettingSate extends State<GameSettings> {
   static const String _onePlayer = "Single Player";
   static const List<String> _difList = ['Easy', 'Medium', 'Hard'];
   static const String _difStart = 'Easy';
+  bool _playerIsX = true;
   bool _highlighting = true;
   String _difDropDown = _difStart;
 
@@ -23,6 +25,10 @@ class GameSettingSate extends State<GameSettings> {
   Widget build(BuildContext context) {
     const String highlightingTrue = "Move Highlighting On";
     const String highlightingFalse = "Move Highlighting Off";
+
+    const String playerIsXTrue = "Player X Starts";
+    const String playerIsXFalse = "Player O Starts";
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -34,6 +40,10 @@ class GameSettingSate extends State<GameSettings> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            const Text(
+              "Settings",
+              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+            ),
             DropdownButton<String>(
                 value: _difDropDown,
                 items: _difList.map<DropdownMenuItem<String>>((String value) {
@@ -48,6 +58,14 @@ class GameSettingSate extends State<GameSettings> {
                   });
                 }),
             ElevatedButton(
+                key: const Key("turn_button"),
+                onPressed: () {
+                  setState(() {
+                    _playerIsX = !_playerIsX;
+                  });
+                },
+                child: Text(_playerIsX ? playerIsXTrue : playerIsXFalse)),
+            ElevatedButton(
                 key: const Key("move_highlighting_button"),
                 onPressed: () {
                   setState(() {
@@ -56,6 +74,10 @@ class GameSettingSate extends State<GameSettings> {
                 },
                 child:
                     Text(_highlighting ? highlightingTrue : highlightingFalse)),
+            const Text(
+              "Play",
+              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+            ),
             ElevatedButton(
                 key: const Key("single_player_button"),
                 onPressed: () {
@@ -66,6 +88,7 @@ class GameSettingSate extends State<GameSettings> {
                             isSinglePlayer: true,
                             difficulty: _difDropDown,
                             highlighting: _highlighting,
+                            playerTurn: _playerIsX ? TileState.X : TileState.O,
                             key: const Key("single_player")),
                       ));
                 },
@@ -80,6 +103,7 @@ class GameSettingSate extends State<GameSettings> {
                             isSinglePlayer: false,
                             difficulty: _difDropDown,
                             highlighting: _highlighting,
+                            playerTurn: _playerIsX ? TileState.X : TileState.O,
                             key: const Key("two_player")),
                       ));
                 },

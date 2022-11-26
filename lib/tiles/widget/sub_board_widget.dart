@@ -112,7 +112,6 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
     SubBoard? sb = sbw._subBoard.getBoard().getCurrentSubboard();
 
     double opacityVal;
-    print(sbw._highlighting);
     if (sb == sbw._subBoard && sbw._highlighting) {
       opacityVal = 0.5;
     } else {
@@ -121,25 +120,21 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
 
     //ik its jank asf
     MainBoard mb = widget._subBoard.getBoard();
+    Color c;
 
     if (mb.getTurn() == TileState.X) {
-      return Opacity(
-          opacity: opacityVal,
-          child: SizedBox.square(
-              dimension: sbw._boardWidthPixels,
-              child: const DecoratedBox(
-                  decoration: BoxDecoration(
-                color: Color.fromARGB(255, 119, 183, 236),
-              ))));
+      c = const Color.fromARGB(255, 119, 183, 236);
     } else {
-      return Opacity(
-          opacity: opacityVal,
-          child: SizedBox.square(
-              dimension: sbw._boardWidthPixels,
-              child: const DecoratedBox(
-                  decoration: BoxDecoration(
-                color: Color.fromARGB(255, 236, 119, 119),
-              ))));
+      c = const Color.fromARGB(255, 236, 119, 119);
     }
+
+    return Opacity(
+        opacity: opacityVal,
+        child: SizedBox.square(
+            dimension: sbw._boardWidthPixels,
+            child: DecoratedBox(
+                decoration: BoxDecoration(
+              color: c,
+            ))));
   }
 }

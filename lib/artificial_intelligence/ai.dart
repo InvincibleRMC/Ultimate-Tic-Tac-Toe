@@ -33,8 +33,8 @@ class AI {
 
     if (sb == null) {
       // TODO THROWS WHEN LENGTH IS 0???
-      print("AI STILL PLAYING ");
-      print(_board.getAvailableSubBoards());
+      // print("AI STILL PLAYING ");
+      // print(_board.getAvailableSubBoards());
       List<int> enemySbCoords = _board.getPointFromSubBoard(
           _board.getAvailableSubBoards()[
               Random().nextInt(_board.getAvailableSubBoards().length)]);

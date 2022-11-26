@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/pages/game_conclusion.dart';
 import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
+import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/widget/sub_board_widget.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
@@ -37,6 +38,12 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
     if (widget._board.getIsMenu()) {
       timer = Timer.periodic(const Duration(milliseconds: 2000), (Timer t) {
         menuMove();
+        if (widget._board.getAvailableSubBoards().isEmpty) {
+          timer!.cancel();
+        }
+        // for (SubBoard s in widget._board.getAvailableSubBoards()) {
+        //   s.ge
+        // }
       });
     }
   }
