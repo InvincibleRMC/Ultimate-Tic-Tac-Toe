@@ -77,8 +77,8 @@ class MainBoard extends Board {
     return [locI, locJ];
   }
 
-  List<dynamic> getAvailableSubBoards() {
-    var emptySpaces = [];
+  List<SubBoard> getAvailableSubBoards() {
+    List<SubBoard> emptySpaces = [];
 
     for (int i = 0; i < _subBoards.length; i++) {
       for (int j = 0; j < _subBoards[0].length; j++) {

@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
             ElevatedButton(
               key: const Key("game_settings_button"),
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
             ElevatedButton(
                 key: const Key("app_settings_button"),
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>

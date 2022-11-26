@@ -59,7 +59,7 @@ class GameSettingSate extends State<GameSettings> {
             ElevatedButton(
                 key: const Key("single_player_button"),
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => GamePage(
@@ -72,7 +72,7 @@ class GameSettingSate extends State<GameSettings> {
             ElevatedButton(
                 key: const Key("two_player_button"),
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => GamePage(
@@ -85,7 +85,7 @@ class GameSettingSate extends State<GameSettings> {
             ElevatedButton(
               key: const Key("home_button"),
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => HomePage(),

@@ -29,7 +29,7 @@ class GameConclusion extends StatelessWidget {
             ElevatedButton(
               key: const Key("home_button"),
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => HomePage(),

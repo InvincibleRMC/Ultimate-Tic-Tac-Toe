@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -27,6 +29,7 @@ class TileWidget extends StatefulWidget {
 }
 
 class TileWidgetState extends State<TileWidget> {
+  bool aiPlaying = false;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -38,11 +41,33 @@ class TileWidgetState extends State<TileWidget> {
     );
   }
 
+  _refreshTile() {
+    setState(() {});
+  }
+
   _updateTile(BuildContext context, TileWidget widget) {
+    //Timer t = Timer.periodic(const Duration(milliseconds: 2000), (Timer t) {});
     setState(() {
+      // if (aiPlaying) {
+      //   return;
+      // }
+
       MainBoard mb = widget._tile.getSubBoard().getBoard();
       if (mb.isSinglePlayer() && !mb.getIsMenu()) {
-        enemyMove(mb);
+        if (TileState.X == mb.getTurn()) {
+          widget._tile.placeTile();
+          if (TileState.X == mb.getTurn()) {
+            return;
+          } else {
+            sleep(const Duration(milliseconds: 1000));
+            // Future.delayed(const Duration(seconds: 1), () {
+            mb.getAIMove().placeTile();
+            // });
+          }
+          widget._notifySubBoard(context, widget._tile.getSubBoard());
+          // });
+        }
+        //enemyMove(mb);
       } else if (mb.getIsMenu()) {
       } else {
         widget._tile.placeTile();
@@ -53,32 +78,12 @@ class TileWidgetState extends State<TileWidget> {
 
   void enemyMove(MainBoard mb) {
     if (mb.getTurn() == TileState.X) {
-      //widget._tile.placeTile();
-
-      Future.delayed(const Duration(seconds: 1), () {
-        SubBoard? sb =
-            widget._tile.getSubBoard().getBoard().getCurrentSubboard();
-
-        if (sb == null) {
-          List<int> enemySbCoords = mb.getPointFromSubBoard(
-              mb.getAvailableSubBoards()[
-                  Random().nextInt(mb.getAvailableSubBoards().length)]);
-
-          SubBoard enemySb = mb.getSubBoard(enemySbCoords[0], enemySbCoords[1]);
-
-          List<int> enemyMove = enemySb.getAvailableTiles()[
-              Random().nextInt(enemySb.getAvailableTiles().length)];
-
-          enemySb.getTile(enemyMove[0], enemyMove[1]).placeTile();
-        } else {
-          List<int> enemyMove = sb.getAvailableTiles()[
-              Random().nextInt(sb.getAvailableTiles().length)];
-          sb.getTile(enemyMove[0], enemyMove[1]).placeTile();
-        }
-
-        widget._notifySubBoard(context, widget._tile.getSubBoard());
-      });
+      widget._tile.placeTile();
     }
+    if (mb.getTurn() == TileState.O) aiPlaying = true;
+    Future.delayed(const Duration(seconds: 1), () {
+      aiPlaying = false;
+    });
   }
 
   Widget symbolForTile(TileWidget tileWidget) {

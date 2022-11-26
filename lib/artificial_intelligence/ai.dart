@@ -25,31 +25,26 @@ class AI {
 
   Tile getTile() {
     //TODO make a setting maybe
-    sleep(const Duration(milliseconds: 1000));
+    //sleep(const Duration(milliseconds: 1000));
     return fun();
   }
 
   Tile easy() {
     SubBoard? sb = _board.getCurrentSubboard();
-    Tile t;
+
     if (sb == null) {
+      // TODO THROWS WHEN LENGTH IS 0???
+      print("AI STILL PLAYING ");
+      print(_board.getAvailableSubBoards());
       List<int> enemySbCoords = _board.getPointFromSubBoard(
           _board.getAvailableSubBoards()[
               Random().nextInt(_board.getAvailableSubBoards().length)]);
 
-      SubBoard enemySb = _board.getSubBoard(enemySbCoords[0], enemySbCoords[1]);
-
-      List<int> enemyMove = enemySb.getAvailableTiles()[
-          Random().nextInt(enemySb.getAvailableTiles().length)];
-
-      t = enemySb.getTile(enemyMove[0], enemyMove[1]);
-    } else {
-      List<int> enemyMove = sb
-          .getAvailableTiles()[Random().nextInt(sb.getAvailableTiles().length)];
-      t = sb.getTile(enemyMove[0], enemyMove[1]);
+      sb = _board.getSubBoard(enemySbCoords[0], enemySbCoords[1]);
     }
-
-    return t;
+    List<int> enemyMove =
+        sb.getAvailableTiles()[Random().nextInt(sb.getAvailableTiles().length)];
+    return sb.getTile(enemyMove[0], enemyMove[1]);
   }
 
   Tile medium() {

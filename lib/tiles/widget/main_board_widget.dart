@@ -12,15 +12,18 @@ class MainBoardWidget extends StatefulWidget {
   final MainBoard _board;
   final double _boardWidthPixels;
   final double _boardHeightPixels;
+  Timer? _timer;
   //TODO make a square not rectangle?
-  const MainBoardWidget({
+  MainBoardWidget({
     Key? key,
     required MainBoard board,
     required double boardWidthPixels,
     required double boardHeightPixels,
+    Timer? timer,
   })  : _board = board,
         _boardWidthPixels = boardWidthPixels,
         _boardHeightPixels = boardHeightPixels,
+        _timer = timer,
         super(key: key);
 
   @override
@@ -29,19 +32,26 @@ class MainBoardWidget extends StatefulWidget {
 
 class MainBoardWidgetState extends State<MainBoardWidget> {
   late bool isFirstMove;
-  late Timer _everySecond;
-
+  Timer? timer;
   @override
   void initState() {
     super.initState();
 
     if (widget._board.getIsMenu()) {
       isFirstMove = true;
-      _everySecond =
-          Timer.periodic(const Duration(milliseconds: 2000), (Timer t) {
-        _menuMove(isFirstMove);
+
+      timer = Timer.periodic(const Duration(milliseconds: 2000), (Timer t) {
+        menuMove(isFirstMove);
       });
       isFirstMove = false;
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    if (timer != null) {
+      timer!.cancel();
     }
   }
 
@@ -51,11 +61,15 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
   }
 
   void _boardRefresh(BuildContext context, MainBoard b) {
+    if (b.getIsMenu()) {
+      return;
+    }
+
     setState(() {
       if (b.solved(b.getSubBoardStates()) || b.isTied(b.getSubBoardStates())) {
         TileState winner = b.winner(b.getSubBoardStates());
 
-        Navigator.push(
+        Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => GameConclusion(winner: winner),
@@ -64,7 +78,7 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
     });
   }
 
-  void _menuMove(bool isFirstMove) {
+  void menuMove(bool isFirstMove) {
     setState(() {
       SubBoard? sb;
 
@@ -75,23 +89,7 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
         sb = widget._board.getCurrentSubboard();
       }
 
-      if (sb == null) {
-        List<int> enemySbCoords = widget._board.getPointFromSubBoard(
-            widget._board.getAvailableSubBoards()[Random()
-                .nextInt(widget._board.getAvailableSubBoards().length)]);
-
-        SubBoard enemySb =
-            widget._board.getSubBoard(enemySbCoords[0], enemySbCoords[1]);
-
-        List<int> enemyMove = enemySb.getAvailableTiles()[
-            Random().nextInt(enemySb.getAvailableTiles().length)];
-
-        enemySb.getTile(enemyMove[0], enemyMove[1]).placeTile();
-      } else {
-        List<int> enemyMove = sb.getAvailableTiles()[
-            Random().nextInt(sb.getAvailableTiles().length)];
-        sb.getTile(enemyMove[0], enemyMove[1]).placeTile();
-      }
+      widget._board.getAIMove().placeTile();
     });
   }
 
