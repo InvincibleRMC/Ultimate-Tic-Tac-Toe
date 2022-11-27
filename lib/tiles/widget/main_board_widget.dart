@@ -37,7 +37,7 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
 
     if (widget._board.getIsMenu()) {
       timer = Timer.periodic(const Duration(milliseconds: 2000), (Timer t) {
-        menuMove();
+        _menuMove();
         if (widget._board.getAvailableSubBoards().isEmpty) {
           timer!.cancel();
         }
@@ -79,7 +79,7 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
     });
   }
 
-  void menuMove() {
+  void _menuMove() {
     setState(() {
       widget._board.getAIMove().placeTile();
     });

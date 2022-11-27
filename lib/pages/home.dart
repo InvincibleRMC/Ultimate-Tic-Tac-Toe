@@ -29,11 +29,12 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            MainBoardWidget(
-                board: menuBoard,
-                boardWidthPixels: mainBoardWidth,
-                boardHeightPixels: mainBoardHeight,
-                highlighting: true),
+            Expanded(
+                child: MainBoardWidget(
+                    board: menuBoard,
+                    boardWidthPixels: mainBoardWidth,
+                    boardHeightPixels: mainBoardHeight,
+                    highlighting: true)),
             ElevatedButton(
               key: const Key("game_settings_button"),
               onPressed: () {

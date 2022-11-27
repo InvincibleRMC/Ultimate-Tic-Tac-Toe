@@ -31,7 +31,7 @@ class MainBoard extends Board {
       [bool isSinglePlayer = false,
       String difficulty = "Easy",
       int size = 3,
-      bool isMenu = true,
+      bool isMenu = false,
       TileState startingTurn = TileState.X])
       : _isSinglePlayer = isSinglePlayer,
         _isMenu = isMenu,
