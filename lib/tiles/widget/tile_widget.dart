@@ -1,9 +1,7 @@
-import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
-
 import '../main_board.dart';
 
 class TileWidget extends StatefulWidget {

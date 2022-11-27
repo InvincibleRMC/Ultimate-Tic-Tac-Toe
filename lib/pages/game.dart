@@ -25,7 +25,6 @@ class GamePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mainBoardWidth = MediaQuery.of(context).size.width;
-    final mainBoardHeight = MediaQuery.of(context).size.width;
     MainBoard board =
         MainBoard(_isSinglePlayer, _difficulty, 3, false, _playerTurn);
 
@@ -34,8 +33,7 @@ class GamePage extends StatelessWidget {
       body: Center(
           child: MainBoardWidget(
         board: board,
-        boardWidthPixels: mainBoardWidth,
-        boardHeightPixels: mainBoardHeight,
+        boardSizePixels: mainBoardWidth,
         highlighting: _highlighting,
       )),
     ));

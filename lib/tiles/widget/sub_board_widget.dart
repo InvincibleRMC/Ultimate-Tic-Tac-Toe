@@ -6,21 +6,17 @@ import '../main_board.dart';
 
 class SubBoardWidget extends StatefulWidget {
   final SubBoard _subBoard;
-  final double _boardWidthPixels;
-  final double _boardHeightPixels;
+  final double _boardSizePixels;
   final Function _notifyBoard;
   final bool _highlighting;
-  //TODO make a square not rectangle?
   const SubBoardWidget({
     Key? key,
     required SubBoard subBoard,
-    required double boardWidthPixels,
-    required double boardHeightPixels,
+    required double boardSizePixels,
     required Function notifyBoard,
     bool highlighting = true,
   })  : _subBoard = subBoard,
-        _boardWidthPixels = boardWidthPixels,
-        _boardHeightPixels = boardHeightPixels,
+        _boardSizePixels = boardSizePixels,
         _notifyBoard = notifyBoard,
         _highlighting = highlighting,
         super(key: key);
@@ -44,7 +40,7 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
   Widget subBoardTiles() {
     return Builder(builder: (context) {
       final int boardCount = widget._subBoard.getBoard().size();
-      final boardDim = widget._boardWidthPixels;
+      final boardDim = widget._boardSizePixels;
       final tileDim = boardDim / boardCount;
 
       final children = <Widget>[];
@@ -72,7 +68,7 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
       Widget w = symbolForTile(widget._subBoard.getWinner(), widget);
 
       Image img = Image.asset('images/board.png',
-          height: widget._boardHeightPixels, width: widget._boardWidthPixels);
+          height: widget._boardSizePixels, width: widget._boardSizePixels);
 
       return Stack(
         alignment: Alignment.center,
@@ -94,15 +90,15 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
       case TileState.O:
         widget = Image.asset('images/o.png',
             key: Key("$stringKeySBW O Tile"),
-            height: subBoardWidget._boardHeightPixels,
-            width: subBoardWidget._boardWidthPixels);
+            height: subBoardWidget._boardSizePixels,
+            width: subBoardWidget._boardSizePixels);
         break;
 
       case TileState.X:
         widget = Image.asset('images/x.png',
             key: Key("$stringKeySBW X Tile"),
-            height: subBoardWidget._boardHeightPixels,
-            width: subBoardWidget._boardWidthPixels);
+            height: subBoardWidget._boardSizePixels,
+            width: subBoardWidget._boardSizePixels);
         break;
     }
     return widget;
@@ -131,7 +127,7 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
     return Opacity(
         opacity: opacityVal,
         child: SizedBox.square(
-            dimension: sbw._boardWidthPixels,
+            dimension: sbw._boardSizePixels,
             child: DecoratedBox(
                 decoration: BoxDecoration(
               color: c,

@@ -20,8 +20,7 @@ void main() {
       MainBoard b = MainBoard();
 
       MaterialApp materialWidget = MaterialApp(
-        home: MainBoardWidget(
-            board: b, boardWidthPixels: 100, boardHeightPixels: 100),
+        home: MainBoardWidget(board: b, boardSizePixels: 100),
 
         // This mocked observer will now receive all navigation events
         // that happen in our app.
@@ -46,8 +45,7 @@ void main() {
       MainBoard b = MainBoard();
 
       MaterialApp materialWidget = MaterialApp(
-        home: MainBoardWidget(
-            board: b, boardWidthPixels: 100, boardHeightPixels: 100),
+        home: MainBoardWidget(board: b, boardSizePixels: 100),
 
         // This mocked observer will now receive all navigation events
         // that happen in our app.

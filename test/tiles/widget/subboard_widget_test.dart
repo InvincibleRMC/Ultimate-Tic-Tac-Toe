@@ -21,8 +21,7 @@ void main() {
     SubBoardWidget sbw = SubBoardWidget(
         key: keySBW,
         subBoard: sb,
-        boardHeightPixels: 40,
-        boardWidthPixels: 40,
+        boardSizePixels: 40,
         notifyBoard: (BuildContext context, MainBoard b) => {});
 
     Widget mediaWidget = MediaQuery(

@@ -16,7 +16,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mainBoardWidth = MediaQuery.of(context).size.width;
-    final mainBoardHeight = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -32,8 +31,7 @@ class HomePage extends StatelessWidget {
             Expanded(
                 child: MainBoardWidget(
                     board: menuBoard,
-                    boardWidthPixels: mainBoardWidth,
-                    boardHeightPixels: mainBoardHeight,
+                    boardSizePixels: mainBoardWidth,
                     highlighting: true)),
             ElevatedButton(
               key: const Key("game_settings_button"),

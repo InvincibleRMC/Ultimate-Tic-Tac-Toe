@@ -2,25 +2,21 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/pages/game_conclusion.dart';
 import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
-import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/widget/sub_board_widget.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 class MainBoardWidget extends StatefulWidget {
   final MainBoard _board;
-  final double _boardWidthPixels;
-  final double _boardHeightPixels;
+  final double _boardSizePixels;
   final bool _highlighting;
   //TODO make a square not rectangle?
   const MainBoardWidget({
     Key? key,
     required MainBoard board,
-    required double boardWidthPixels,
-    required double boardHeightPixels,
+    required double boardSizePixels,
     bool highlighting = true,
   })  : _board = board,
-        _boardWidthPixels = boardWidthPixels,
-        _boardHeightPixels = boardHeightPixels,
+        _boardSizePixels = boardSizePixels,
         _highlighting = highlighting,
         super(key: key);
 
@@ -88,8 +84,7 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
   Widget gameBoard() {
     return Builder(builder: (context) {
       final int boardCount = widget._board.size();
-      final double subBoardHeight = widget._boardHeightPixels / boardCount;
-      final double subBoardWidth = widget._boardWidthPixels / boardCount;
+      final double subBoardSize = widget._boardSizePixels / boardCount;
 
       final List<Widget> children = <Widget>[];
 
@@ -98,8 +93,7 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
           children.add(
             SubBoardWidget(
               subBoard: widget._board.getSubBoard(i, j),
-              boardWidthPixels: subBoardWidth,
-              boardHeightPixels: subBoardHeight,
+              boardSizePixels: subBoardSize,
               notifyBoard: _boardRefresh,
               highlighting: widget._highlighting,
             ),
