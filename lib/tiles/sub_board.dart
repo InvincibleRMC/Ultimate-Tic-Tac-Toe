@@ -22,8 +22,8 @@ class SubBoard extends Board {
     return _tiles[i][j];
   }
 
-  List<dynamic> getAvailableTiles() {
-    var emptySpaces = [];
+  List<List<int>> getAvailableTiles() {
+    List<List<int>> emptySpaces = [];
 
     for (int i = 0; i < _tiles.length; i++) {
       for (int j = 0; j < _tiles[0].length; j++) {

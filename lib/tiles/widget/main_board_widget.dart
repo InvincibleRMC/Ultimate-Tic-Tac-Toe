@@ -9,7 +9,6 @@ class MainBoardWidget extends StatefulWidget {
   final MainBoard _board;
   final double _boardSizePixels;
   final bool _highlighting;
-  //TODO make a square not rectangle?
   const MainBoardWidget({
     Key? key,
     required MainBoard board,
@@ -37,9 +36,6 @@ class MainBoardWidgetState extends State<MainBoardWidget> {
         if (widget._board.getAvailableSubBoards().isEmpty) {
           timer!.cancel();
         }
-        // for (SubBoard s in widget._board.getAvailableSubBoards()) {
-        //   s.ge
-        // }
       });
     }
   }

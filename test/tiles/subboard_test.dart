@@ -5,6 +5,22 @@ import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 void main() {
+  test('getAvailableTiles', () {
+    MainBoard board = MainBoard();
+    SubBoard sub = board.getSubBoard(0, 0);
+    sub.getTile(0, 0).setTile(TileState.X);
+    sub.getTile(0, 1).setTile(TileState.X);
+    sub.getTile(0, 2).setTile(TileState.X);
+    sub.getTile(1, 0).setTile(TileState.X);
+    sub.getTile(1, 1).setTile(TileState.X);
+    expect(sub.getAvailableTiles().length, 4);
+
+    sub.getTile(1, 2).setTile(TileState.X);
+    sub.getTile(2, 0).setTile(TileState.X);
+    sub.getTile(2, 1).setTile(TileState.X);
+    sub.getTile(2, 2).setTile(TileState.X);
+    expect(sub.getAvailableTiles().length, 0);
+  });
   test('SubBoard Constructor test', () {
     MainBoard board = MainBoard();
     SubBoard sub = board.getSubBoard(0, 0);

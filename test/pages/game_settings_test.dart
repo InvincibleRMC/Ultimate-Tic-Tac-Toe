@@ -8,6 +8,34 @@ import 'package:ultimate_tic_tac_toe/pages/home.dart';
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
+  testWidgets('turn_button', (WidgetTester tester) async {
+    GameSettings gs = const GameSettings();
+    await tester.pumpWidget(MaterialApp(
+      home: gs,
+    ));
+
+    await tester.tap(find.byKey(const Key("turn_button")));
+    await tester.pumpAndSettle();
+  });
+  testWidgets('move_highlighting_button', (WidgetTester tester) async {
+    GameSettings gs = const GameSettings();
+    await tester.pumpWidget(MaterialApp(
+      home: gs,
+    ));
+
+    await tester.tap(find.byKey(const Key("move_highlighting_button")));
+    await tester.pumpAndSettle();
+  });
+  testWidgets('drop_down_button', (WidgetTester tester) async {
+    GameSettings gs = const GameSettings();
+    await tester.pumpWidget(MaterialApp(
+      home: gs,
+    ));
+
+    await tester.tap(find.byKey(const Key("drop_down_button")));
+    await tester.pumpAndSettle();
+  });
+
   group('GameSettings navigation tests', () {
     late NavigatorObserver mockObserver;
 

@@ -28,11 +28,11 @@ class MainBoard extends Board {
   TileState _turn;
 
   MainBoard(
-      [bool isSinglePlayer = false,
+      {bool isSinglePlayer = false,
       String difficulty = "Easy",
       int size = 3,
       bool isMenu = false,
-      TileState startingTurn = TileState.X])
+      TileState startingTurn = TileState.X})
       : _isSinglePlayer = isSinglePlayer,
         _isMenu = isMenu,
         _startingTurn = startingTurn,
@@ -43,6 +43,10 @@ class MainBoard extends Board {
         size,
         (int index) =>
             List<SubBoard>.generate(size, (int index) => SubBoard(this)));
+  }
+
+  AI getAI() {
+    return _ai;
   }
 
   TileState getStartingTurn() {

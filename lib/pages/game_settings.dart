@@ -45,9 +45,11 @@ class GameSettingSate extends State<GameSettings> {
               style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
             ),
             DropdownButton<String>(
+                key: const Key("drop_down_button"),
                 value: _difDropDown,
                 items: _difList.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
+                    key: Key(value),
                     value: value,
                     child: Text(value),
                   );

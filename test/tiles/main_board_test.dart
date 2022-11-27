@@ -1,9 +1,38 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ultimate_tic_tac_toe/tiles/main_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
+import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 
 void main() {
+  test('setTied()', () {
+    MainBoard board = MainBoard();
+    expect(board.isTiedTesting(), false);
+    board.setTied();
+    expect(board.isTiedTesting(), true);
+    board.setTied();
+    expect(board.isTiedTesting(), true);
+  });
+  test('getStartingTurn()', () {
+    MainBoard board = MainBoard(startingTurn: TileState.X);
+    expect(board.getStartingTurn(), TileState.X);
+    board.getSubBoard(0, 0).getTile(0, 0).placeTile;
+    expect(board.getStartingTurn(), TileState.X);
+    board.getSubBoard(0, 0).getTile(0, 0).placeTile;
+    expect(board.getStartingTurn(), TileState.X);
+
+    MainBoard board2 = MainBoard(startingTurn: TileState.O);
+    expect(board2.getStartingTurn(), TileState.O);
+  });
+  test('getAIMove()', () {
+    MainBoard board = MainBoard(startingTurn: TileState.X);
+    board.getAI().setSeed(123);
+    Tile t = board.getAIMove();
+    SubBoard s = t.getSubBoard();
+    expect(s, board.getSubBoard(2, 1));
+    expect(t, s.getTile(2, 1));
+  });
+
   test('Turn Change', () {
     MainBoard board = MainBoard();
     expect(board.getTurn(), TileState.X);

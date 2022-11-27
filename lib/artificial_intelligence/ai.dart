@@ -7,19 +7,30 @@ import '../tiles/tile.dart';
 
 class AI {
   final MainBoard _board;
+  int? _seed;
   final TileState _turn;
   late Tile Function() fun;
 
-  AI(MainBoard board, String difficulty, TileState turn)
+  AI(MainBoard board, String difficulty, TileState turn, [int? seed])
       : _board = board,
         _turn = turn {
-    if (difficulty == "Easy") {
-      fun = easy;
-    } else if (difficulty == "Medium") {
-      fun = medium;
-    } else if (difficulty == "Hard") {
-      fun = hard;
+    if (seed == null) {
+      _seed = Random().nextInt(4294967296);
+    } else {
+      _seed = seed;
     }
+
+    if (difficulty == "Easy") {
+      fun = _easy;
+    } else if (difficulty == "Medium") {
+      fun = _medium;
+    } else if (difficulty == "Hard") {
+      fun = _hard;
+    }
+  }
+
+  void setSeed(int seed) {
+    _seed = seed;
   }
 
   Tile getTile() {
@@ -28,29 +39,27 @@ class AI {
     return fun();
   }
 
-  Tile easy() {
+  Tile _easy() {
     SubBoard? sb = _board.getCurrentSubboard();
 
     if (sb == null) {
       // TODO THROWS WHEN LENGTH IS 0???
-      // print("AI STILL PLAYING ");
-      // print(_board.getAvailableSubBoards());
       List<int> enemySbCoords = _board.getPointFromSubBoard(
           _board.getAvailableSubBoards()[
-              Random().nextInt(_board.getAvailableSubBoards().length)]);
+              Random(_seed).nextInt(_board.getAvailableSubBoards().length)]);
 
       sb = _board.getSubBoard(enemySbCoords[0], enemySbCoords[1]);
     }
-    List<int> enemyMove =
-        sb.getAvailableTiles()[Random().nextInt(sb.getAvailableTiles().length)];
+    List<int> enemyMove = sb.getAvailableTiles()[
+        Random(_seed).nextInt(sb.getAvailableTiles().length)];
     return sb.getTile(enemyMove[0], enemyMove[1]);
   }
 
-  Tile medium() {
+  Tile _medium() {
     return _board.getSubBoard(0, 0).getTile(0, 0);
   }
 
-  Tile hard() {
+  Tile _hard() {
     return _board.getSubBoard(0, 0).getTile(0, 0);
   }
 }

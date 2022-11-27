@@ -11,7 +11,8 @@ class HomePage extends StatelessWidget {
   final String _title = "Home";
   final String _gameSettings = "Play Game";
   final String _settings = "Settings";
-  final MainBoard menuBoard = MainBoard(false, "Easy", 3, true);
+  final MainBoard menuBoard =
+      MainBoard(isSinglePlayer: false, difficulty: "Easy", isMenu: true);
 
   @override
   Widget build(BuildContext context) {

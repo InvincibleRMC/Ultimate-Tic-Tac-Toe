@@ -37,12 +37,7 @@ class TileWidgetState extends State<TileWidget> {
   }
 
   _updateTile(BuildContext context, TileWidget widget) {
-    //Timer t = Timer.periodic(const Duration(milliseconds: 2000), (Timer t) {});
     setState(() {
-      // if (aiPlaying) {
-      //   return;
-      // }
-
       MainBoard mb = widget._tile.getSubBoard().getBoard();
       if (mb.isSinglePlayer() && !mb.getIsMenu()) {
         if (mb.getStartingTurn() == mb.getTurn()) {
@@ -51,14 +46,10 @@ class TileWidgetState extends State<TileWidget> {
             return;
           } else {
             sleep(const Duration(milliseconds: 1000));
-            // Future.delayed(const Duration(seconds: 1), () {
             mb.getAIMove().placeTile();
-            // });
           }
           widget._notifySubBoard(context, widget._tile.getSubBoard());
-          // });
         }
-        //enemyMove(mb);
       } else if (mb.getIsMenu()) {
       } else {
         widget._tile.placeTile();
@@ -66,16 +57,6 @@ class TileWidgetState extends State<TileWidget> {
       widget._notifySubBoard(context, widget._tile.getSubBoard());
     });
   }
-
-  // void enemyMove(MainBoard mb) {
-  //   if (mb.getTurn() == TileState.X) {
-  //     widget._tile.placeTile();
-  //   }
-  //   if (mb.getTurn() == TileState.O) aiPlaying = true;
-  //   Future.delayed(const Duration(seconds: 1), () {
-  //     aiPlaying = false;
-  //   });
-  // }
 
   Widget symbolForTile(TileWidget tileWidget) {
     Tile tile = tileWidget._tile;

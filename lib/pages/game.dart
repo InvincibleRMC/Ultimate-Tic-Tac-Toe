@@ -20,13 +20,15 @@ class GamePage extends StatelessWidget {
         _playerTurn = playerTurn;
 
   final String title = "Home";
-  //final String home = "Play GamePage";
   final String settings = "Settings";
   @override
   Widget build(BuildContext context) {
     final mainBoardWidth = MediaQuery.of(context).size.width;
-    MainBoard board =
-        MainBoard(_isSinglePlayer, _difficulty, 3, false, _playerTurn);
+    MainBoard board = MainBoard(
+        isSinglePlayer: _isSinglePlayer,
+        difficulty: _difficulty,
+        size: 3,
+        startingTurn: _playerTurn);
 
     return MaterialApp(
         home: Scaffold(
