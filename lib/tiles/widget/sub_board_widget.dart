@@ -114,7 +114,6 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
       opacityVal = 0;
     }
 
-    //ik its jank asf
     MainBoard mb = widget._subBoard.getBoard();
     Color c;
 

@@ -46,12 +46,14 @@ class AI {
       // TODO THROWS WHEN LENGTH IS 0???
       List<int> enemySbCoords = _board.getPointFromSubBoard(
           _board.getAvailableSubBoards()[
-              Random(_seed).nextInt(_board.getAvailableSubBoards().length)]);
+              Random().nextInt(_board.getAvailableSubBoards().length)]);
 
       sb = _board.getSubBoard(enemySbCoords[0], enemySbCoords[1]);
     }
-    List<int> enemyMove = sb.getAvailableTiles()[
-        Random(_seed).nextInt(sb.getAvailableTiles().length)];
+
+    List<int> enemyMove =
+        sb.getAvailableTiles()[Random().nextInt(sb.getAvailableTiles().length)];
+
     return sb.getTile(enemyMove[0], enemyMove[1]);
   }
 

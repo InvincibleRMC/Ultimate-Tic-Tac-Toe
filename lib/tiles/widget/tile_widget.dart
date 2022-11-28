@@ -45,10 +45,11 @@ class TileWidgetState extends State<TileWidget> {
           if (mb.getStartingTurn() == mb.getTurn()) {
             return;
           } else {
-            sleep(const Duration(milliseconds: 1000));
-            mb.getAIMove().placeTile();
+            Future.delayed(Duration(seconds: 1), () {
+              mb.getAIMove().placeTile();
+              widget._notifySubBoard(context, widget._tile.getSubBoard());
+            });
           }
-          widget._notifySubBoard(context, widget._tile.getSubBoard());
         }
       } else if (mb.getIsMenu()) {
       } else {
