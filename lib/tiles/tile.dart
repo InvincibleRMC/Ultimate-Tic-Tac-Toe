@@ -8,6 +8,15 @@ class Tile {
   final SubBoard _subBoard;
   TileState _state = TileState.none;
   Tile(SubBoard subBoard) : _subBoard = subBoard;
+  int _score = -1;
+
+  void setScore(int i) {
+    _score = i;
+  }
+
+  int getScore() {
+    return _score;
+  }
 
   SubBoard getSubBoard() {
     return _subBoard;

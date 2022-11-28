@@ -8,10 +8,12 @@ import 'board.dart';
 class MainBoard extends Board {
   late List<List<SubBoard>> _subBoards;
   SubBoard? _currentSB;
-  final bool _isSinglePlayer;
+  bool _isSinglePlayer;
+  // final String _difficulty;
   late AI _ai;
-  final bool _isMenu;
-
+  bool _isMenu;
+  TileState _startingTurn;
+  TileState _turn;
   bool _tied = false;
 
   @visibleForTesting
@@ -24,9 +26,6 @@ class MainBoard extends Board {
     return _tied;
   }
 
-  final TileState _startingTurn;
-  TileState _turn;
-
   MainBoard(
       {bool isSinglePlayer = false,
       String difficulty = "Easy",
@@ -35,6 +34,7 @@ class MainBoard extends Board {
       TileState startingTurn = TileState.X})
       : _isSinglePlayer = isSinglePlayer,
         _isMenu = isMenu,
+        // _difficulty = difficulty,
         _startingTurn = startingTurn,
         _turn = startingTurn,
         super(size) {
@@ -44,6 +44,22 @@ class MainBoard extends Board {
         (int index) =>
             List<SubBoard>.generate(size, (int index) => SubBoard(this)));
   }
+  MainBoard.copy(MainBoard b)
+      : _isSinglePlayer = b._isSinglePlayer,
+        _ai = b._ai,
+        _isMenu = b._isMenu,
+        _startingTurn = b._startingTurn,
+        _turn = b._turn {
+    _subBoards = List<List<SubBoard>>.generate(
+        b._subBoards.length,
+        (int index) => List<SubBoard>.generate(
+            b._subBoards.length, (int index) => SubBoard(this)));
+  }
+
+  // MainBoard copy(){
+  //   MainBoard b = MainBoard(isSinglePlayer: _isSinglePlayer,difficulty: _difficulty,size: getSize(),startingTurn: _startingTurn)
+  //   return
+  // }
 
   AI getAI() {
     return _ai;
@@ -144,4 +160,7 @@ class MainBoard extends Board {
     }
     return true;
   }
+
+  // List<List<Tile>>
+
 }

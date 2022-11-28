@@ -22,13 +22,13 @@ class SubBoard extends Board {
     return _tiles[i][j];
   }
 
-  List<List<int>> getAvailableTiles() {
-    List<List<int>> emptySpaces = [];
+  List<Tile> getAvailableTiles() {
+    List<Tile> emptySpaces = [];
 
     for (int i = 0; i < _tiles.length; i++) {
       for (int j = 0; j < _tiles[0].length; j++) {
         if (_tiles[i][j].getTile() == TileState.none) {
-          emptySpaces.add([i, j]);
+          emptySpaces.add(_tiles[i][j]);
         }
       }
     }
