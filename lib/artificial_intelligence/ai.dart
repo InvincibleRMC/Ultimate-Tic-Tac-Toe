@@ -7,6 +7,7 @@ import '../tiles/tile.dart';
 
 class AI {
   final MainBoard _board;
+  //THIS EXISTS FOR UNIT TESTING
   int? _seed;
   final TileState _turn;
   late Tile Function() fun;
@@ -42,19 +43,12 @@ class AI {
   Tile _easy() {
     SubBoard? sb = _board.getCurrentSubboard();
 
-    if (sb == null) {
-      // TODO THROWS WHEN LENGTH IS 0???
-      List<int> enemySbCoords = _board.getPointFromSubBoard(
-          _board.getAvailableSubBoards()[
-              Random().nextInt(_board.getAvailableSubBoards().length)]);
+    // Only runs if sb is null
+    sb ??= _board.getAvailableSubBoards()[
+        Random(_seed).nextInt(_board.getAvailableSubBoards().length)];
 
-      sb = _board.getSubBoard(enemySbCoords[0], enemySbCoords[1]);
-    }
-
-    List<int> enemyMove =
-        sb.getAvailableTiles()[Random().nextInt(sb.getAvailableTiles().length)];
-
-    return sb.getTile(enemyMove[0], enemyMove[1]);
+    return sb.getAvailableTiles()[
+        Random(_seed).nextInt(sb.getAvailableTiles().length)];
   }
 
   Tile _medium() {
