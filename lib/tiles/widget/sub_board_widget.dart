@@ -82,8 +82,8 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
     Widget widget;
 
     String stringKeySBW = subBoardWidget.key.toString();
-    String xIcon = AppSettingState.currentXIcon;
-    String oIcon = AppSettingState.currentOIcon;
+    String xIcon = AppSettingState.getCurrentXIcon();
+    String oIcon = AppSettingState.getCurrentOIcon();
 
     switch (winner) {
       case TileState.none:

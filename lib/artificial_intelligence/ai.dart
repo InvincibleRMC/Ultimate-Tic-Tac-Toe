@@ -9,12 +9,13 @@ class AI {
   final MainBoard _board;
   //THIS EXISTS FOR UNIT TESTING
   int? _seed;
-  final TileState _turn;
+  //final TileState _turn;
   late Tile Function() fun;
 
   AI(MainBoard board, String difficulty, TileState turn, [int? seed])
-      : _board = board,
-        _turn = turn {
+      : _board = board
+  // _turn = turn
+  {
     if (seed == null) {
       _seed = Random().nextInt(4294967296);
     } else {
@@ -35,8 +36,6 @@ class AI {
   }
 
   Tile getTile() {
-    //TODO make a setting maybe
-    //sleep(const Duration(milliseconds: 1000));
     return fun();
   }
 

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
@@ -46,7 +45,7 @@ class TileWidgetState extends State<TileWidget> {
           if (mb.getStartingTurn() == mb.getTurn()) {
             return;
           } else {
-            Future.delayed(Duration(seconds: 1), () {
+            Future.delayed(const Duration(seconds: 1), () {
               mb.getAIMove().placeTile();
               widget._notifySubBoard(context, widget._tile.getSubBoard());
             });
@@ -61,8 +60,9 @@ class TileWidgetState extends State<TileWidget> {
   }
 
   Widget symbolForTile(TileWidget tileWidget) {
-    String xIcon = AppSettingState.currentXIcon;
-    String oIcon = AppSettingState.currentOIcon;
+    String xIcon = AppSettingState.getCurrentXIcon();
+    String oIcon = AppSettingState.getCurrentOIcon();
+
     Tile tile = tileWidget._tile;
     Widget widget;
     switch (tile.getTile()) {

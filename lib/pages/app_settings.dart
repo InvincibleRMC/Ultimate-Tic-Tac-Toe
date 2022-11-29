@@ -8,43 +8,64 @@ class AppSettings extends StatefulWidget {
   AppSettingState createState() => AppSettingState();
 }
 
-class AppSettingState extends State<AppSettings>
-{
-  static String _title = "App Settings";
-  static String _home = "Return Home";
-  static const List<String> _iconList = ['Classic', 'Pets', 'Sports', 'Suits', 'Time'];
+class AppSettingState extends State<AppSettings> {
+  final String _title = "App Settings";
+  final String _home = "Return Home";
+  static const List<String> _iconList = [
+    'Classic',
+    'Pets',
+    'Sports',
+    'Suits',
+    'Time'
+  ];
   static const String _iconStart = 'Classic';
   String _iconDropDown = _iconStart;
-  static String currentXIcon = 'images/x.png';
-  static String currentOIcon = 'images/o.png';
+  static String _currentXIcon = 'images/x.png';
+  static String _currentOIcon = 'images/o.png';
 
-  changeIcon()
-  {
-    switch(_iconDropDown) {
+  static String getCurrentXIcon() {
+    return _currentXIcon;
+  }
+
+  static String getCurrentOIcon() {
+    return _currentOIcon;
+  }
+
+  @visibleForTesting
+  void changeIcon(String icon) {
+    _iconDropDown = icon;
+    _changeIcon();
+  }
+
+  void _changeIcon() {
+    switch (_iconDropDown) {
       case 'Classic':
-        currentXIcon = 'images/x.png';
-        currentOIcon = 'images/o.png';
+        _currentXIcon = 'images/x.png';
+        _currentOIcon = 'images/o.png';
         break;
       case 'Pets':
-        currentXIcon = 'images/dog.png';
-        currentOIcon = 'images/cat.png';
+        _currentXIcon = 'images/dog.png';
+        _currentOIcon = 'images/cat.png';
         break;
       case 'Sports':
-        currentXIcon = 'images/football.png';
-        currentOIcon = 'images/soccer.png';
+        _currentXIcon = 'images/football.png';
+        _currentOIcon = 'images/soccer.png';
         break;
       case 'Suits':
-        currentXIcon = 'images/hearts.png';
-        currentOIcon = 'images/spades.png';
+        _currentXIcon = 'images/hearts.png';
+        _currentOIcon = 'images/spades.png';
         break;
       case 'Time':
-        currentXIcon = 'images/sun.png';
-        currentOIcon = 'images/moon.png';
+        _currentXIcon = 'images/sun.png';
+        _currentOIcon = 'images/moon.png';
         break;
     }
   }
+
   @override
   Widget build(BuildContext context) {
+    final double size = MediaQuery.of(context).size.width / 5;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -59,56 +80,46 @@ class AppSettingState extends State<AppSettings>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Column(
-                  children:
-                  [
-          Image.asset(currentXIcon),
-                  ],
+                Image.asset(
+                  _currentXIcon,
+                  key: Key(_currentXIcon),
+                  width: size,
+                  height: size,
                 ),
-                Column(
-                  children:
-                  [
-                    Image.asset(currentOIcon),
-                  ],
+                Image.asset(
+                  _currentOIcon,
+                  key: Key(_currentOIcon),
+                  width: size,
+                  height: size,
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                DropdownButton<String>(
-                    key: const Key("drop_down_button"),
-                    value: _iconDropDown,
-                    items: _iconList.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        key: Key(value),
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _iconDropDown = newValue!;
-                      });
-                      changeIcon();
-                    }),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  key: const Key("home_button"),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ));
-                  },
-                  child: Text(_home),
-                ),
-              ],
+            DropdownButton<String>(
+                key: const Key("drop_down_button"),
+                value: _iconDropDown,
+                items: _iconList.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    key: Key(value),
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _iconDropDown = newValue!;
+                  });
+                  _changeIcon();
+                }),
+            ElevatedButton(
+              key: const Key("home_button"),
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(),
+                    ));
+              },
+              child: Text(_home),
             ),
           ],
         ),
