@@ -12,11 +12,25 @@ class AppSettingState extends State<AppSettings>
 {
   static String _title = "App Settings";
   static String _home = "Return Home";
-  static  String _test = "test";
   static const List<String> _iconList = ['Classic', 'Pets'];
   static const String _iconStart = 'Classic';
   String _iconDropDown = _iconStart;
+  static String currentXIcon = 'images/x.png';
+  static String currentOIcon = 'images/o.png';
 
+  changeIcon()
+  {
+    switch(_iconDropDown) {
+      case 'Classic':
+        currentXIcon = 'images/x.png';
+        currentOIcon = 'images/o.png';
+        break;
+      case 'Pets':
+        currentXIcon = 'images/cat.png';
+        currentOIcon = 'images/dog.png';
+        break;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,13 +50,13 @@ class AppSettingState extends State<AppSettings>
                 Column(
                   children:
                   [
-                    Image.asset('images/x.png'),
+          Image.asset(currentXIcon),
                   ],
                 ),
                 Column(
                   children:
                   [
-                    Image.asset('images/o.png'),
+                    Image.asset(currentOIcon),
                   ],
                 ),
               ],
@@ -50,13 +64,22 @@ class AppSettingState extends State<AppSettings>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  key: const Key("test_button"),
-                  onPressed: () {
-                    //TODO
-                  },
-                  child: Text(_test),
-                ),
+                DropdownButton<String>(
+                    key: const Key("drop_down_button"),
+                    value: _iconDropDown,
+                    items: _iconList.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        key: Key(value),
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _iconDropDown = newValue!;
+                      });
+                      changeIcon();
+                    }),
               ],
             ),
             Row(
