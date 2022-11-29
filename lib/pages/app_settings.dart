@@ -18,27 +18,20 @@ class AppSettingState extends State<AppSettings> {
     'Suits',
     'Time'
   ];
-  static String _iconStart = 'Classic';
+  static const String _iconStart = 'Classic';
   String _iconDropDown = _iconStart;
   static String _currentXIcon = 'images/x.png';
   static String _currentOIcon = 'images/o.png';
 
   //Background Board
-  static const List<String> _boardList = [
-    'Classic',
-    'Checkerboard',
-    'Outside'
-  ];
-  static String _boardStart = 'Classic';
+  static const List<String> _boardList = ['Classic', 'Checkerboard', 'Outside'];
+  static const String _boardStart = 'Classic';
   String _boardDropDown = _boardStart;
   static String _currentBoard = 'images/board.png';
 
   //Color Mode
-  static const List<String> _modeList = [
-    'Light Mode',
-    'Dark Mode'
-  ];
-  static String _modeStart = 'Light Mode';
+  static const List<String> _modeList = ['Light Mode', 'Dark Mode'];
+  static const String _modeStart = 'Light Mode';
   String _modeDropDown = _modeStart;
   static int _currentBackgroundColor = 0xffffffff;
   static int _currentTextColor = 0xff000000;
@@ -69,8 +62,20 @@ class AppSettingState extends State<AppSettings> {
     _changeIcon();
   }
 
+  @visibleForTesting
+  void changeBoard(String board) {
+    _boardDropDown = board;
+    _changeBoard();
+  }
+
+  @visibleForTesting
+  void changeMode(String mode) {
+    _modeDropDown = mode;
+    _changeMode();
+  }
+
   void _changeIcon() {
-    _iconStart = _iconDropDown;
+    // _iconStart = _iconDropDown;
     switch (_iconDropDown) {
       case 'Classic':
         _currentXIcon = 'images/x.png';
@@ -100,7 +105,7 @@ class AppSettingState extends State<AppSettings> {
   }
 
   void _changeBoard() {
-    _boardStart = _boardDropDown;
+    //_boardStart = _boardDropDown;
     switch (_boardDropDown) {
       case 'Classic':
         _currentBoard = 'images/board.png';
@@ -118,7 +123,7 @@ class AppSettingState extends State<AppSettings> {
   }
 
   void _changeMode() {
-    _modeStart = _modeDropDown;
+    // _modeStart = _modeDropDown;
     switch (_modeDropDown) {
       case 'Light Mode':
         _currentBackgroundColor = 0xffffffff;
@@ -129,10 +134,9 @@ class AppSettingState extends State<AppSettings> {
         _currentTextColor = 0xffffffff;
         break;
       default:
-
         break;
     }
-    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +150,6 @@ class AppSettingState extends State<AppSettings> {
           _title,
         ),
       ),
-
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -171,9 +174,7 @@ class AppSettingState extends State<AppSettings> {
             DropdownButton<String>(
                 key: const Key("icon_drop_down_button"),
                 value: _iconDropDown,
-                style: new TextStyle(
-                  color: Color(getCurrentTextColor())
-                ),
+                style: TextStyle(color: Color(getCurrentTextColor())),
                 dropdownColor: Color(getCurrentBackgroundColor()),
                 items: _iconList.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
@@ -197,9 +198,7 @@ class AppSettingState extends State<AppSettings> {
             DropdownButton<String>(
                 key: const Key("board_drop_down_button"),
                 value: _boardDropDown,
-                style: new TextStyle(
-                    color: Color(getCurrentTextColor())
-                ),
+                style: TextStyle(color: Color(getCurrentTextColor())),
                 dropdownColor: Color(getCurrentBackgroundColor()),
                 items: _boardList.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
@@ -217,9 +216,7 @@ class AppSettingState extends State<AppSettings> {
             DropdownButton<String>(
                 key: const Key("mode_drop_down_button"),
                 value: _modeDropDown,
-                style: new TextStyle(
-                    color: Color(getCurrentTextColor())
-                ),
+                style: TextStyle(color: Color(getCurrentTextColor())),
                 dropdownColor: Color(getCurrentBackgroundColor()),
                 items: _modeList.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(

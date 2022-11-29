@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/pages/app_settings.dart';
-import 'package:ultimate_tic_tac_toe/pages/app_settings.dart';
-
 import '../tiles/main_board.dart';
 import '../tiles/widget/main_board_widget.dart';
 import 'game_settings.dart';

@@ -45,15 +45,18 @@ class GameSettingSate extends State<GameSettings> {
           children: <Widget>[
             const Text(
               "Settings",
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, color: Color(0xfff84434)),
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xfff84434)),
             ),
             DropdownButton<String>(
                 key: const Key("drop_down_button"),
                 value: _difDropDown,
-                style: new TextStyle(
-                    color: Color(AppSettingState.getCurrentTextColor())
-                ),
-                dropdownColor: Color(AppSettingState.getCurrentBackgroundColor()),
+                style: TextStyle(
+                    color: Color(AppSettingState.getCurrentTextColor())),
+                dropdownColor:
+                    Color(AppSettingState.getCurrentBackgroundColor()),
                 items: _difList.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     key: Key(value),
@@ -85,7 +88,10 @@ class GameSettingSate extends State<GameSettings> {
                     Text(_highlighting ? highlightingTrue : highlightingFalse)),
             const Text(
               "Play",
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, color: Color(0xfff84434)),
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xfff84434)),
             ),
             ElevatedButton(
                 key: const Key("single_player_button"),
