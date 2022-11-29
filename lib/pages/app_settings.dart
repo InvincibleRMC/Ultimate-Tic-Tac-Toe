@@ -13,13 +13,14 @@ class AppSettingState extends State<AppSettings>
   static String _title = "App Settings";
   static String _home = "Return Home";
   static const List<String> _iconList = ['Classic', 'Pets', 'Sports', 'Suits', 'Time'];
-  static const String _iconStart = 'Classic';
-  String _iconDropDown = _iconStart;
+  static String _iconStart = 'Classic';
+  static String _iconDropDown = _iconStart;
   static String currentXIcon = 'images/x.png';
   static String currentOIcon = 'images/o.png';
 
   changeIcon()
   {
+    _iconStart = _iconDropDown;
     switch(_iconDropDown) {
       case 'Classic':
         currentXIcon = 'images/x.png';
