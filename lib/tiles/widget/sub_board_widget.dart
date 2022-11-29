@@ -91,14 +91,14 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
         break;
 
       case TileState.O:
-        widget = Image.asset(xIcon,
+        widget = Image.asset(oIcon,
             key: Key("$stringKeySBW O Tile"),
             height: subBoardWidget._boardSizePixels,
             width: subBoardWidget._boardSizePixels);
         break;
 
       case TileState.X:
-        widget = Image.asset(oIcon,
+        widget = Image.asset(xIcon,
             key: Key("$stringKeySBW X Tile"),
             height: subBoardWidget._boardSizePixels,
             width: subBoardWidget._boardSizePixels);

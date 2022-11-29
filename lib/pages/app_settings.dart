@@ -12,7 +12,7 @@ class AppSettingState extends State<AppSettings>
 {
   static String _title = "App Settings";
   static String _home = "Return Home";
-  static const List<String> _iconList = ['Classic', 'Pets'];
+  static const List<String> _iconList = ['Classic', 'Pets', 'Sports', 'Suits', 'Time'];
   static const String _iconStart = 'Classic';
   String _iconDropDown = _iconStart;
   static String currentXIcon = 'images/x.png';
@@ -26,8 +26,20 @@ class AppSettingState extends State<AppSettings>
         currentOIcon = 'images/o.png';
         break;
       case 'Pets':
-        currentXIcon = 'images/cat.png';
-        currentOIcon = 'images/dog.png';
+        currentXIcon = 'images/dog.png';
+        currentOIcon = 'images/cat.png';
+        break;
+      case 'Sports':
+        currentXIcon = 'images/football.png';
+        currentOIcon = 'images/soccer.png';
+        break;
+      case 'Suits':
+        currentXIcon = 'images/hearts.png';
+        currentOIcon = 'images/spades.png';
+        break;
+      case 'Time':
+        currentXIcon = 'images/sun.png';
+        currentOIcon = 'images/moon.png';
         break;
     }
   }
