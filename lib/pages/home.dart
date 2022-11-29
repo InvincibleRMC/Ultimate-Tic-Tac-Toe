@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/pages/app_settings.dart';
+import 'package:ultimate_tic_tac_toe/pages/app_settings.dart';
 
 import '../tiles/main_board.dart';
 import '../tiles/widget/main_board_widget.dart';
@@ -19,6 +20,7 @@ class HomePage extends StatelessWidget {
     final mainBoardWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      backgroundColor: Color(AppSettingState.getCurrentBackgroundColor()),
       appBar: AppBar(
         centerTitle: true,
         title: Text(
