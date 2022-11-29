@@ -1,7 +1,7 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
+import 'package:ultimate_tic_tac_toe/pages/app_settings.dart';
 import '../main_board.dart';
 
 class TileWidget extends StatefulWidget {
@@ -45,7 +45,7 @@ class TileWidgetState extends State<TileWidget> {
           if (mb.getStartingTurn() == mb.getTurn()) {
             return;
           } else {
-            Future.delayed(Duration(seconds: 1), () {
+            Future.delayed(const Duration(seconds: 1), () {
               mb.getAIMove().placeTile();
               widget._notifySubBoard(context, widget._tile.getSubBoard());
             });
@@ -60,20 +60,22 @@ class TileWidgetState extends State<TileWidget> {
   }
 
   Widget symbolForTile(TileWidget tileWidget) {
+    String xIcon = AppSettingState.getCurrentXIcon();
+    String oIcon = AppSettingState.getCurrentOIcon();
+
     Tile tile = tileWidget._tile;
     Widget widget;
-
     switch (tile.getTile()) {
       case TileState.none:
         widget = Container(key: const Key("Empty Tile"));
         break;
 
       case TileState.O:
-        widget = Image.asset('images/o.png', key: const Key("O Tile"));
+        widget = Image.asset(oIcon, key: const Key("O Tile"));
         break;
 
       case TileState.X:
-        widget = Image.asset('images/x.png', key: const Key("X Tile"));
+        widget = Image.asset(xIcon, key: const Key("X Tile"));
         break;
     }
     return widget;

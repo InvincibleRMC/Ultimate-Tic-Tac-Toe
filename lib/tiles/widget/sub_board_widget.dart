@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/sub_board.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
 import 'package:ultimate_tic_tac_toe/tiles/widget/tile_widget.dart';
+import 'package:ultimate_tic_tac_toe/pages/app_settings.dart';
 import '../main_board.dart';
 
 class SubBoardWidget extends StatefulWidget {
@@ -81,6 +82,8 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
     Widget widget;
 
     String stringKeySBW = subBoardWidget.key.toString();
+    String xIcon = AppSettingState.getCurrentXIcon();
+    String oIcon = AppSettingState.getCurrentOIcon();
 
     switch (winner) {
       case TileState.none:
@@ -88,14 +91,14 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
         break;
 
       case TileState.O:
-        widget = Image.asset('images/o.png',
+        widget = Image.asset(oIcon,
             key: Key("$stringKeySBW O Tile"),
             height: subBoardWidget._boardSizePixels,
             width: subBoardWidget._boardSizePixels);
         break;
 
       case TileState.X:
-        widget = Image.asset('images/x.png',
+        widget = Image.asset(xIcon,
             key: Key("$stringKeySBW X Tile"),
             height: subBoardWidget._boardSizePixels,
             width: subBoardWidget._boardSizePixels);
