@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/pages/home.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
+import 'package:ultimate_tic_tac_toe/pages/app_settings.dart';
 import 'game.dart';
 
 class GameSettings extends StatefulWidget {
@@ -20,6 +21,7 @@ class GameSettingSate extends State<GameSettings> {
   bool _playerIsX = true;
   bool _highlighting = true;
   String _difDropDown = _difStart;
+  int textColor = 0xffffff;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class GameSettingSate extends State<GameSettings> {
     const String playerIsXFalse = "Player O Starts";
 
     return Scaffold(
+      backgroundColor: Color(AppSettingState.getCurrentBackgroundColor()),
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
@@ -42,11 +45,18 @@ class GameSettingSate extends State<GameSettings> {
           children: <Widget>[
             const Text(
               "Settings",
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xfff84434)),
             ),
             DropdownButton<String>(
                 key: const Key("drop_down_button"),
                 value: _difDropDown,
+                style: TextStyle(
+                    color: Color(AppSettingState.getCurrentTextColor())),
+                dropdownColor:
+                    Color(AppSettingState.getCurrentBackgroundColor()),
                 items: _difList.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     key: Key(value),
@@ -78,7 +88,10 @@ class GameSettingSate extends State<GameSettings> {
                     Text(_highlighting ? highlightingTrue : highlightingFalse)),
             const Text(
               "Play",
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xfff84434)),
             ),
             ElevatedButton(
                 key: const Key("single_player_button"),

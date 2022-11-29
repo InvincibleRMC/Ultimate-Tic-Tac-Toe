@@ -1,11 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/pages/app_settings.dart';
-
 import '../tiles/main_board.dart';
 import '../tiles/widget/main_board_widget.dart';
 import 'game_settings.dart';
 
-// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   final String _title = "Home";
@@ -16,9 +16,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainBoardWidth = MediaQuery.of(context).size.width;
+    final double mainBoardWidth = min(
+        MediaQuery.of(context).size.height, MediaQuery.of(context).size.width);
 
     return Scaffold(
+      backgroundColor: Color(AppSettingState.getCurrentBackgroundColor()),
       appBar: AppBar(
         centerTitle: true,
         title: Text(

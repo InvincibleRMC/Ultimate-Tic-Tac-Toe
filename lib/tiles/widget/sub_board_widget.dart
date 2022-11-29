@@ -68,12 +68,13 @@ class SubBoardWidgetState extends State<SubBoardWidget> {
 
       Widget w = symbolForTile(widget._subBoard.getWinner(), widget);
 
-      Image img = Image.asset('images/board.png',
+      String boardImage = AppSettingState.getCurrentBoard();
+      Image img = Image.asset(boardImage,
           height: widget._boardSizePixels, width: widget._boardSizePixels);
 
       return Stack(
         alignment: Alignment.center,
-        children: [w, img, highlighting(widget), gv],
+        children: [img, w, highlighting(widget), gv],
       );
     });
   }

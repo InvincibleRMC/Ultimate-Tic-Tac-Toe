@@ -30,14 +30,55 @@ void main() {
     expect(AppSettingState.getCurrentXIcon(), "images/sun.png");
     expect(AppSettingState.getCurrentOIcon(), "images/moon.png");
   });
+  test('_changeBoard()', () {
+    AppSettingState appSettingState = AppSettingState();
 
-  testWidgets('drop_down_button test', (WidgetTester tester) async {
+    appSettingState.changeBoard("Classic");
+    expect(AppSettingState.getCurrentBoard(), "images/board.png");
+
+    appSettingState.changeBoard("Checkerboard");
+    expect(AppSettingState.getCurrentBoard(), "images/checkerboard.png");
+
+    appSettingState.changeBoard("Outside");
+    expect(AppSettingState.getCurrentBoard(), "images/outside.png");
+  });
+  test('_changeMode()', () {
+    AppSettingState appSettingState = AppSettingState();
+
+    appSettingState.changeMode("Light Mode");
+    expect(AppSettingState.getCurrentBackgroundColor(), 0xffffffff);
+    expect(AppSettingState.getCurrentTextColor(), 0xff000000);
+
+    appSettingState.changeMode("Dark Mode");
+    expect(AppSettingState.getCurrentBackgroundColor(), 0xff35363a);
+    expect(AppSettingState.getCurrentTextColor(), 0xffffffff);
+  });
+
+  testWidgets('icon_drop_down_button test', (WidgetTester tester) async {
     AppSettings as = const AppSettings();
     await tester.pumpWidget(MaterialApp(
       home: as,
     ));
 
-    await tester.tap(find.byKey(const Key("drop_down_button")));
+    await tester.tap(find.byKey(const Key("icon_drop_down_button")));
+    await tester.pumpAndSettle();
+  });
+  testWidgets('board_drop_down_button test', (WidgetTester tester) async {
+    AppSettings as = const AppSettings();
+    await tester.pumpWidget(MaterialApp(
+      home: as,
+    ));
+
+    await tester.tap(find.byKey(const Key("board_drop_down_button")));
+    await tester.pumpAndSettle();
+  });
+  testWidgets('mode_drop_down_button test', (WidgetTester tester) async {
+    AppSettings as = const AppSettings();
+    await tester.pumpWidget(MaterialApp(
+      home: as,
+    ));
+
+    await tester.tap(find.byKey(const Key("mode_drop_down_button")));
     await tester.pumpAndSettle();
   });
   group('AppSettings navigation tests', () {

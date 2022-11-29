@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/pages/home.dart';
 import 'package:ultimate_tic_tac_toe/tiles/tile_state.dart';
+import 'package:ultimate_tic_tac_toe/pages/app_settings.dart';
 
 class GameConclusion extends StatelessWidget {
   const GameConclusion({
@@ -16,6 +17,7 @@ class GameConclusion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(AppSettingState.getCurrentBackgroundColor()),
       appBar: AppBar(
         centerTitle: true,
         title: Text(

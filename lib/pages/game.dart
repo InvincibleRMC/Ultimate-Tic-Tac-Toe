@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/tiles/widget/main_board_widget.dart';
+import 'package:ultimate_tic_tac_toe/pages/app_settings.dart';
 import '../tiles/main_board.dart';
 import '../tiles/tile_state.dart';
 
@@ -23,7 +26,8 @@ class GamePage extends StatelessWidget {
   final String settings = "Settings";
   @override
   Widget build(BuildContext context) {
-    final mainBoardWidth = MediaQuery.of(context).size.width;
+    final double mainBoardSize = min(
+        MediaQuery.of(context).size.height, MediaQuery.of(context).size.width);
     MainBoard board = MainBoard(
         isSinglePlayer: _isSinglePlayer,
         difficulty: _difficulty,
@@ -32,10 +36,11 @@ class GamePage extends StatelessWidget {
 
     return MaterialApp(
         home: Scaffold(
+      backgroundColor: Color(AppSettingState.getCurrentBackgroundColor()),
       body: Center(
           child: MainBoardWidget(
         board: board,
-        boardSizePixels: mainBoardWidth,
+        boardSizePixels: mainBoardSize,
         highlighting: _highlighting,
       )),
     ));
