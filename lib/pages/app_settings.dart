@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:ultimate_tic_tac_toe/pages/home.dart';
 
@@ -140,7 +142,9 @@ class AppSettingState extends State<AppSettings> {
 
   @override
   Widget build(BuildContext context) {
-    final double size = MediaQuery.of(context).size.width / 5;
+    final double size = min(MediaQuery.of(context).size.height,
+            MediaQuery.of(context).size.width) /
+        5;
 
     return Scaffold(
       backgroundColor: Color(getCurrentBackgroundColor()),
