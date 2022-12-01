@@ -51,10 +51,10 @@ class AI {
   }
 
   Tile _medium() {
-    return _board.getSubBoard(0, 0).getTile(0, 0);
+    return _easy();
   }
 
   Tile _hard() {
-    return _board.getSubBoard(0, 0).getTile(0, 0);
+    return _easy();
   }
 }

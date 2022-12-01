@@ -10,12 +10,4 @@ void main() {
     // ignore: unused_local_variable
     MainBoard hard = MainBoard(difficulty: "Hard");
   });
-  test('Medium Logic Test', () {
-    MainBoard medium = MainBoard(difficulty: "Medium");
-    expect(medium.getAI().getTile(), medium.getSubBoard(0, 0).getTile(0, 0));
-  });
-  test('Hard Logic Test', () {
-    MainBoard hard = MainBoard(difficulty: "Hard");
-    expect(hard.getAI().getTile(), hard.getSubBoard(0, 0).getTile(0, 0));
-  });
 }
