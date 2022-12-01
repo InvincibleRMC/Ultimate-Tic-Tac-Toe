@@ -14,3 +14,6 @@ Code Coverage [tool](https://pub.dev/packages/code_coverage)
 ```flutter pub global activate code_coverage``` 
 
 ```flutter pub global run code_coverage```
+
+Omissions from SRS
+Medium and Hard AI difficulties
