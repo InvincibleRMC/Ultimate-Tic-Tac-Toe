@@ -3,7 +3,10 @@
 
 A Flutter project for CSDS 393
 
-Project Stored [here](https://github.com/InvincibleRMC/Ultimate-Tic-Tac-Toe)
+
+To view Source code click [here](https://github.com/InvincibleRMC/Ultimate-Tic-Tac-Toe)
+
+If you want to run app install flutter and build the app.
 
 ## Getting Started
 
